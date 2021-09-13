@@ -35,6 +35,9 @@ int main() {
     int v[N] = {4,0,9,2,5};
     out1 = sumaSubMax1(v, N);
     out2 = sumaSubMax2(v, N);
+
+    printf("sumaSubMax1 = %d \n", out1);
+    printf("sumaSubMax2 = %d \n", out2);
  
  
     return 0;

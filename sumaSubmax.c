@@ -1,5 +1,21 @@
 #include <stdio.h>
+
+#define N 5
  
+int sumaSubMax1(int v[],int n)
+{
+    int sumamax=0;
+    for (int i = 0; i < n; ++i) {
+        int estasuma=0;
+        for (int j = 0; j < n; ++j) {
+            estasuma=estasuma+v[j];
+            if (estasuma>sumamax)
+                sumamax=estasuma;
+        }
+    }
+    return sumamax;
+}
+
 int sumaSubMax2 (int v[], int n){
     int estaSuma, sumaMax =0;
 
@@ -15,31 +31,12 @@ int sumaSubMax2 (int v[], int n){
 }
 
 int main() {
- 
+    int out1,out2;
+    int v[N] = {4,0,9,2,5};
+    out1 = sumaSubMax1(v, N);
+    out2 = sumaSubMax2(v, N);
  
  
     return 0;
 }
 
-
-//////////////////////////////////////////////////
-
-
-    void sumaSubMax1(int pepe[],int n)
-    {
-        int sumamax=0;
-        for (int i = 1; i < n; ++i) {
-            int estasuma=0;
-            for (int j = 1; j < n; ++j) {
-                estasuma=estasuma+n;
-                if (estasuma>sumamax)
-                    sumamax=estasuma;
-            }
-        }
-    }
-    int main (void)
-    {
-     
-     
-       return 0;
-    }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <sys/time.h>
 
 #define N 5
 
@@ -51,6 +52,14 @@ void printResults (int v[]){
     printf("]");
     printf("    %d    %d \n", sumaSubMax1(v, N), sumaSubMax2(v, N));
 
+}
+
+double microsegundos() {  /* obtiene la hora del sistema en microsegundos */
+    struct timeval t;
+    if (gettimeofday(&t, NULL) < 0 ){
+        return 0.0;
+    }
+return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
 int main() {

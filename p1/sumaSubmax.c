@@ -61,7 +61,7 @@ double microsegundos() {  /* obtiene la hora del sistema en microsegundos */
 }
 
 int test3(int vector[], int numero){
-  float ta=0,tb=0,t=0;
+  double ta=0,tb=0,t=0;
 
   inicializar_semilla(); aleatorio(vector,numero);
 
@@ -73,8 +73,8 @@ int test3(int vector[], int numero){
   t=tb-ta;
 
   if(t<500){
-    float t1=0,t2=0;
-    int k=10000;
+    double t1=0,t2=0;
+    int k=1000;
 
     ta=microsegundos();
     printf("%f\n", ta);

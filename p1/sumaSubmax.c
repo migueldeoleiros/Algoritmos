@@ -3,8 +3,6 @@
 #include <time.h>
 #include <sys/time.h>
 
-#define N 5
-
 void inicializar_semilla(){
     srand(time(NULL));
 }
@@ -44,13 +42,13 @@ int sumaSubMax2 (int v[], int n){
     return sumaMax;
 }
 
-void printResults (int v[]){
+void printResults (int v[], int n){
     printf("[ ");
-    for (int i=0; i<N;i++){
+    for (int i=0; i<n;i++){
         printf("%d ", v[i]);
     }
     printf("]");
-    printf("    %d    %d \n", sumaSubMax1(v, N), sumaSubMax2(v, N));
+    printf("    %d    %d \n", sumaSubMax1(v, n), sumaSubMax2(v, n));
 
 }
 
@@ -59,53 +57,66 @@ double microsegundos() {  /* obtiene la hora del sistema en microsegundos */
     if (gettimeofday(&t, NULL) < 0 ){
         return 0.0;
     }
-return (t.tv_usec + t.tv_sec * 1000000.0);
+    return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
-int test3(int vector[]){
-  int numero=500;
+int test3(int vector[], int numero){
   float ta=0,tb=0,t=0;
-  inicializar_semilla();
-  aleatorio(vector,numero);
+
+  inicializar_semilla(); aleatorio(vector,numero);
+
   ta=microsegundos();
-  sumaSubMax1(vector);
+  printf("%f\n", ta);
+  sumaSubMax1(vector, numero);
   tb=microsegundos();
+  printf("%f\n", tb);
   t=tb-ta;
+
   if(t<500){
     float t1=0,t2=0;
-    int k=500;
+    int k=10000;
+
     ta=microsegundos();
+    printf("%f\n", ta);
     for(int i=0;i<k;i++){
-      inicializar_semilla;
-      aleatorio(vector,numero);
-      sumaSubMax1(vector);
+      inicializar_semilla(); aleatorio(vector,numero);
+      sumaSubMax1(vector, numero);
     }
     tb=microsegundos();
+    printf("%f\n", tb);
     t1=tb-ta;
+
     ta=microsegundos();
     for(int i=0;i<k;i++){
-      inicializar_semilla;
-      aleatorio(vector,numero);
+      inicializar_semilla(); aleatorio(vector,numero);
     }
     tb=microsegundos();
     t2=tb-ta;
     t=(t1-t2)/k;
   }
-
-
-
+  return t;
 }
-int main() {
 
-    int v[N] = {7,-5,6,7,-7};
-    printResults(v);
+int main() {
+    int tiempo =0; 
+    int n=5;
+
+    int v[] = {7,-5,6,7,-7};
+    printResults(v, n);
 
 // aleatorio
 
     inicializar_semilla();
-    aleatorio(v, N);
+    aleatorio(v, n);
 
-    printResults(v);
+    printResults(v, n);
+
+    n = 500;
+    int vector[n];
+
+    tiempo = test3(vector, n);
+
+    printf("%d\n", tiempo);
 
     return 0;
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include <sys/time.h>
 
 void inicializar_semilla(){
@@ -60,16 +61,14 @@ double microsegundos() {  /* obtiene la hora del sistema en microsegundos */
     return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
-int test3(int vector[], int numero){
+double testSumaSubmax1(int vector[], int numero){
   double ta=0,tb=0,t=0;
 
   inicializar_semilla(); aleatorio(vector,numero);
 
   ta=microsegundos();
-  printf("%f\n", ta);
   sumaSubMax1(vector, numero);
   tb=microsegundos();
-  printf("%f\n", tb);
   t=tb-ta;
 
   if(t<500){
@@ -77,13 +76,11 @@ int test3(int vector[], int numero){
     int k=1000;
 
     ta=microsegundos();
-    printf("%f\n", ta);
     for(int i=0;i<k;i++){
       inicializar_semilla(); aleatorio(vector,numero);
       sumaSubMax1(vector, numero);
     }
     tb=microsegundos();
-    printf("%f\n", tb);
     t1=tb-ta;
 
     ta=microsegundos();
@@ -93,13 +90,49 @@ int test3(int vector[], int numero){
     tb=microsegundos();
     t2=tb-ta;
     t=(t1-t2)/k;
+    printf("(*)");
+  }
+  return t;
+}
+
+double testSumaSubmax2(int vector[], int numero){
+  double ta=0,tb=0,t=0;
+
+  inicializar_semilla(); aleatorio(vector,numero);
+
+  ta=microsegundos();
+  sumaSubMax2(vector, numero);
+  tb=microsegundos();
+  t=tb-ta;
+
+  if(t<500){
+    double t1=0,t2=0;
+    int k=1000;
+
+    ta=microsegundos();
+    for(int i=0;i<k;i++){
+      inicializar_semilla(); aleatorio(vector,numero);
+      sumaSubMax2(vector, numero);
+    }
+    tb=microsegundos();
+    t1=tb-ta;
+
+    ta=microsegundos();
+    for(int i=0;i<k;i++){
+      inicializar_semilla(); aleatorio(vector,numero);
+    }
+    tb=microsegundos();
+    t2=tb-ta;
+    t=(t1-t2)/k;
+    printf("(*)");
   }
   return t;
 }
 
 int main() {
-    int tiempo =0; 
+    double t =0; 
     int n=5;
+    double tsub, taj, tsob;
 
     int v[] = {7,-5,6,7,-7};
     printResults(v, n);
@@ -111,12 +144,38 @@ int main() {
 
     printResults(v, n);
 
+    printf("Test con SumaSubMax1 \n");
+	printf("%4s%19s%20s%21s%19s \n", "n", "t(n)", "t(n)/n^1.8", "t(n)/n^2", "t(n)/n^2.2");
     n = 500;
-    int vector[n];
+    while(n <= 32000){
+        int vector[n];
+        t = testSumaSubmax1(vector, n);
 
-    tiempo = test3(vector, n);
+        tsub=t/pow(n,1.8);
+		taj=t/pow(n,2);
+		tsob=t/pow(n,2.2);
+		printf("%5d%17.2f%18.6f%22.6f%18.6f\n", n, t, tsub, taj, tsob);
 
-    printf("%d\n", tiempo);
+        n*=2;
+    }
+
+    printf("Test con SumaSubMax2 \n");
+	printf("%4s%19s%21s%22s%18s \n", "n", "t(n)", "t(n)/n^0.75", "t(n)/n^0.95", "t(n)/n^1.15");
+
+    n = 500;
+    while(n <= 32000){
+        int vector[n];
+        t = testSumaSubmax2(vector, n);
+
+        tsub=t/pow(n,0.75);
+		taj=t/pow(n,0.95);
+		tsob=t/pow(n,1.15);
+		printf("%5d%17.2f%18.6f%22.6f%18.6f\n", n, t, tsub, taj, tsob);
+
+
+        n*=2;
+    }
+
 
     return 0;
 }

@@ -180,7 +180,7 @@ void printsumasubmax2(){
     double tsub, taj, tsob;
 
     printf("Test con SumaSubMax2 \n");
-	printf("%7s%17s%20s%20s%19s \n", "n", "t(n)", "t(n)/n^1.8", "t(n)/n^2", "t(n)/n^2.2");
+	printf("%7s%17s%20s%20s%19s \n", "n", "t(n)", "t(n)/n^0.75", "t(n)/n^0.95", "t(n)/n^1.15");
 
     for(int n = 500; n <= 32000; n*=2){
         int vector[n];

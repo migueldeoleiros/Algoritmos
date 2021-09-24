@@ -1,3 +1,10 @@
+// TITLE: Algoritmos Práctica 1 
+// AUTHOR 1: Miguel López López        LOGIN 1: m.llopez 
+// AUTHOR 2:                           LOGIN 2:                   
+// AUTHOR 3:                           LOGIN 3:                   
+// GROUP: 2.1.4 
+// DATE: 20/09/2021 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

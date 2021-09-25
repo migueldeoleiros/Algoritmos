@@ -165,7 +165,6 @@ double testSumaSubmax2(int vector[], int numero){
 }
 
 void printsumasubmax1(){
-    int vector[n];
     double t =0;
     double tsub, taj, tsob;
 
@@ -173,6 +172,7 @@ void printsumasubmax1(){
 	printf("%7s%17s%20s%20s%19s \n", "n", "t(n)", "t(n)/n^1.8", "t(n)/n^2", "t(n)/n^2.2");
 
     for(int n = 500; n <= 32000; n*=2){
+        int vector[n];
         t = testSumaSubmax1(vector, n);
 
         tsub=t/pow(n,1.8);
@@ -183,7 +183,6 @@ void printsumasubmax1(){
 }
 
 void printsumasubmax2(){
-    int vector[n];
     double t =0;
     double tsub, taj, tsob;
 
@@ -191,6 +190,7 @@ void printsumasubmax2(){
 	printf("%7s%17s%20s%20s%19s \n", "n", "t(n)", "t(n)/n^0.75", "t(n)/n^0.95", "t(n)/n^1.15");
 
     for(int n = 500; n <= 32000; n*=2){
+        int vector[n];
         t = testSumaSubmax2(vector, n);
 
         tsub=t/pow(n,0.75);

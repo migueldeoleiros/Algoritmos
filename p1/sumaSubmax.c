@@ -1,9 +1,9 @@
-// TITLE: Algoritmos Práctica 1 
-// AUTHOR 1: Miguel López López        LOGIN 1: m.llopez 
-// AUTHOR 2: Ángel Gómez prol          LOGIN 2: angel.gomez.prol                  
-// AUTHOR 3:                           LOGIN 3:                   
-// GROUP: 2.1.4 
-// DATE: 20/09/2021 
+// TITLE: Algoritmos Práctica 1
+// AUTHOR 1: Miguel López López        LOGIN 1: m.llopez
+// AUTHOR 2: Ángel Gómez prol          LOGIN 2: angel.gomez.prol
+// AUTHOR 3: Xoel Díaz Préstamo        LOGIN 3: xoel.diaz
+// GROUP: 2.1.4
+// DATE: 20/09/2021
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -78,7 +78,7 @@ void printTest1(){
 		{15,-2,-5,-4,16},
 		{-9,2,-5,-4,6}
 	};
- 
+
     printf("test con vectores dados \n");
     for(int i=0; i<6;i++){
         printResults(v[i], n);
@@ -165,14 +165,14 @@ double testSumaSubmax2(int vector[], int numero){
 }
 
 void printsumasubmax1(){
-    double t =0; 
+    int vector[n];
+    double t =0;
     double tsub, taj, tsob;
 
     printf("Test con SumaSubMax1 \n");
 	printf("%7s%17s%20s%20s%19s \n", "n", "t(n)", "t(n)/n^1.8", "t(n)/n^2", "t(n)/n^2.2");
 
     for(int n = 500; n <= 32000; n*=2){
-        int vector[n];
         t = testSumaSubmax1(vector, n);
 
         tsub=t/pow(n,1.8);
@@ -183,14 +183,14 @@ void printsumasubmax1(){
 }
 
 void printsumasubmax2(){
-    double t =0; 
+    int vector[n];
+    double t =0;
     double tsub, taj, tsob;
 
     printf("Test con SumaSubMax2 \n");
 	printf("%7s%17s%20s%20s%19s \n", "n", "t(n)", "t(n)/n^0.75", "t(n)/n^0.95", "t(n)/n^1.15");
 
     for(int n = 500; n <= 32000; n*=2){
-        int vector[n];
         t = testSumaSubmax2(vector, n);
 
         tsub=t/pow(n,0.75);

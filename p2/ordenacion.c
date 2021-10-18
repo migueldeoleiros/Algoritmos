@@ -100,20 +100,21 @@ double testAlgoritmo(int vector[], int numero, void (*func)(int[], int) ){
     return t;
 }
 
-void printChart(void (*func)(int[], int) ){
+void printChart(void (*func)(int[], int),float cotaSub,float cotaAj,float cotaSob ){
     double t =0;
     double tsub, taj, tsob;
 
-    printf("Test con SumaSubMax1 \n");
-	printf("%7s%17s%20s%20s%19s \n", "n", "t(n)", "t(n)/n^1.8", "t(n)/n^2", "t(n)/n^2.2");
+    printf("\n");
+	printf("%7s%17s%20s%.2f%20s%.2f%19s%.2f \n",
+            "n", "t(n)", "t(n)/n^", cotaSub, "t(n)/n^", cotaAj, "t(n)/n^", cotaSob);
 
     for(int n = 500; n <= 32000; n*=2){
         int vector[n];
         t = testAlgoritmo(vector, n, func);
 
-        tsub=t/pow(n,1.8);
-		taj=t/pow(n,2);
-		tsob=t/pow(n,2.2);
+        tsub=t/pow(n,cotaSub);
+		taj=t/pow(n,cotaAj);
+		tsob=t/pow(n,cotaSob);
 		printf("%6d%16.3f%18.6f%20.6f%18.6f\n", n, t, tsub, taj, tsob);
     }
 }
@@ -178,7 +179,7 @@ int main(){
     ord_shell(v, n);
     printVector(v, n);
 
-    printChart(ord_sel);
-    printChart(ord_shell);
+    printChart(ord_shell, 1.05, 1.18, 1.31);
+    printChart(ord_sel, 1.8, 2, 2.2);
     return 0;
 }

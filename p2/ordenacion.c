@@ -66,6 +66,58 @@ void ord_shell(int v[], int n){
     }while(incremento != 1);
 }
 
+double testAlgoritmo(int vector[], int numero, void (*func)(int[], int) ){
+    double ta=0,tb=0,t=0;
+
+    aleatorio(vector,numero);
+
+    ta=microsegundos();
+    func(vector, numero);
+    tb=microsegundos();
+    t=tb-ta;
+
+    if(t<500){
+        double t1=0,t2=0;
+        int k=1000;
+
+        ta=microsegundos();
+        for(int i=0;i<k;i++){
+            aleatorio(vector,numero);
+            func(vector, numero);
+        }
+        tb=microsegundos();
+        t1=tb-ta;
+
+        ta=microsegundos();
+        for(int i=0;i<k;i++){
+            aleatorio(vector,numero);
+        }
+        tb=microsegundos();
+        t2=tb-ta;
+        t=(t1-t2)/k;
+        printf("(*)");
+    }else printf("   ");
+    return t;
+}
+
+void printChart(void (*func)(int[], int) ){
+    double t =0;
+    double tsub, taj, tsob;
+
+    printf("Test con SumaSubMax1 \n");
+	printf("%7s%17s%20s%20s%19s \n", "n", "t(n)", "t(n)/n^1.8", "t(n)/n^2", "t(n)/n^2.2");
+
+    for(int n = 500; n <= 32000; n*=2){
+        int vector[n];
+        t = testAlgoritmo(vector, n, func);
+
+        tsub=t/pow(n,1.8);
+		taj=t/pow(n,2);
+		tsob=t/pow(n,2.2);
+		printf("%6d%16.3f%18.6f%20.6f%18.6f\n", n, t, tsub, taj, tsob);
+    }
+}
+
 void printVector(int v[], int n){
     printf("[");
     for (int i=0; i<n;i++){
@@ -87,11 +139,13 @@ void ascendente(int v[], int n){
         v[i]=i;
     }
 }
+
 int main(){
 
     int n=10;
     int v[n];
     inicializar_semilla();
+
     aleatorio(v, n);
     printf("Inicializacion aleatoria\n");
     printVector(v, n);
@@ -123,5 +177,8 @@ int main(){
     printf("Ordenacion por shell\n");
     ord_shell(v, n);
     printVector(v, n);
+
+    printChart(ord_sel);
+    printChart(ord_shell);
     return 0;
 }

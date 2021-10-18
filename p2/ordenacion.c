@@ -82,7 +82,13 @@ void descendente(int v[], int n){
     }
 }
 
+void ascendente(int v[], int n){
+    for(int i=0;i<n;i++) {
+        v[i]=i;
+    }
+}
 int main(){
+
     int n=10;
     int v[n];
     inicializar_semilla();

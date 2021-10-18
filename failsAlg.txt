@@ -1,0 +1,8 @@
+Inicializar semilla una vez en el main
+Declarar variables arriba de las funciones
+Mejores conclusiones
+Documentar mejores mediciones anomalas
+No usar mas asteriscos
+Usar solo una funcion de medicion de tiempos
+Tests aleatorios mayores
+Mejorar informe en general 

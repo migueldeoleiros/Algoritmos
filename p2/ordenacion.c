@@ -52,7 +52,7 @@ void ord_shell(int v[], int n){
         incremento /= 2;
         for(int i = incremento;i<n;i++){
 			tmp=v[i];
-            j=i; 
+            j=i;
             seguir=1;
 			while ((j-incremento>=0) && (seguir)){
 				if (tmp<v[j-incremento]){
@@ -66,11 +66,11 @@ void ord_shell(int v[], int n){
     }while(incremento != 1);
 }
 
-double testAlgoritmo(int vector[], int numero, void (*func)(int[], int) ){
+double testAlgoritmo(int vector[], int n, void (*func)(int[], int) ){
     double ta=0,tb=0,t=0;
 
     ta=microsegundos();
-    func(vector, numero);
+    func(vector, n);
     tb=microsegundos();
     t=tb-ta;
 
@@ -80,15 +80,15 @@ double testAlgoritmo(int vector[], int numero, void (*func)(int[], int) ){
 
         ta=microsegundos();
         for(int i=0;i<k;i++){
-            aleatorio(vector,numero);
-            func(vector, numero);
+            aleatorio(vector,n);
+            func(vector, n);
         }
         tb=microsegundos();
         t1=tb-ta;
 
         ta=microsegundos();
         for(int i=0;i<k;i++){
-            aleatorio(vector,numero);
+            aleatorio(vector,n);
         }
         tb=microsegundos();
         t2=tb-ta;
@@ -98,7 +98,7 @@ double testAlgoritmo(int vector[], int numero, void (*func)(int[], int) ){
     return t;
 }
 
-void printChart(int *vector, int n, void (*func)(int[], int),float cotaSub,float cotaAj,float cotaSob ){
+void printChart(int n, void (*func)(int[], int),float cotaSub,float cotaAj,float cotaSob ){
     double t =0;
     double tsub, taj, tsob;
 
@@ -107,6 +107,7 @@ void printChart(int *vector, int n, void (*func)(int[], int),float cotaSub,float
             "n", "t(n)", "t(n)/n^", cotaSub, "t(n)/n^", cotaAj, "t(n)/n^", cotaSob);
 
     for(int n = 500; n <= 32000; n*=2){
+        int vector[n];
         t = testAlgoritmo(vector, n, func);
 
         tsub=t/pow(n,cotaSub);
@@ -169,7 +170,7 @@ int main(){
     printVector(v, n);
 
     printf("\n");
-    
+
     descendente(v, n);
     printVector(v, n);
     printf("Ordenacion por shell\n");
@@ -177,17 +178,17 @@ int main(){
     printVector(v, n);
 
     ascendente(v,n);
-    printChart(v,n,ord_shell, 1.1, 1.18, 1.3);
+    printChart(n,ord_shell,1.1,1.18,1.3);
     descendente(v,n);
-    printChart(v,n,ord_shell, 1.1, 1.18, 1.3);
+    printChart(n,ord_shell, 1.1, 1.18, 1.3);
     aleatorio(v,n);
-    printChart(v,n,ord_shell, 1.1, 1.18, 1.3);
+    printChart(n,ord_shell, 1.1, 1.18, 1.3);
 
     ascendente(v,n);
-    printChart(v,n,ord_sel, 1.8, 2, 2.2);
+    printChart(n,ord_sel, 1.8, 2, 2.2);
     descendente(v,n);
-    printChart(v,n,ord_sel, 1.8, 2, 2.2);
+    printChart(n,ord_sel, 1.8, 2, 2.2);
     aleatorio(v,n);
-    printChart(v,n,ord_sel, 1.8, 2, 2.2);
+    printChart(n,ord_sel, 1.8, 2, 2.2);
     return 0;
 }

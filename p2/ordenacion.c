@@ -14,6 +14,7 @@
 void inicializar_semilla(){
     srand(time(NULL));
 }
+
 void aleatorio(int v[], int n){
     int i, m=2*n+1;
     for (i=0;i<n;i++){
@@ -31,10 +32,11 @@ double microsegundos() {  /* obtiene la hora del sistema en microsegundos */
 
 void ord_sel(int v[],int n){
     int minj=0,minx=0;
-    for(int i=0;i<n;i++){
+    int i,j;
+    for(i=0;i<n;i++){
         minj=i;
         minx=v[i];
-        for(int j=i+1;j<n;j++){
+        for(j=i+1;j<n;j++){
             if(v[j]<minx){
     	    minj=j;
             minx=v[j];
@@ -46,11 +48,11 @@ void ord_sel(int v[],int n){
 }
 
 void ord_shell(int v[], int n){
-    int tmp, j, seguir;
+    int tmp,j,i,seguir;
     int incremento = n;
     do{
         incremento /= 2;
-        for(int i = incremento;i<n;i++){
+        for(i = incremento;i<n;i++){
 			tmp=v[i];
             j=i;
             seguir=1;
@@ -66,8 +68,12 @@ void ord_shell(int v[], int n){
     }while(incremento != 1);
 }
 
-double testAlgoritmo(int vector[], int n, void (*func)(int[], int) ){
-    double ta=0,tb=0,t=0;
+double testAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*funGen)(int[], int)){
+    double ta=0,tb=0,t=0,t1=0,t2=0;
+    int k=1000;
+    int count;
+
+    funGen(vector,n);
 
     ta=microsegundos();
     func(vector, n);
@@ -75,20 +81,18 @@ double testAlgoritmo(int vector[], int n, void (*func)(int[], int) ){
     t=tb-ta;
 
     if(t<500){
-        double t1=0,t2=0;
-        int k=1000;
 
         ta=microsegundos();
-        for(int i=0;i<k;i++){
-            aleatorio(vector,n);
+        for(count=0;count<k;count++){
+            funGen(vector,n);
             func(vector, n);
         }
         tb=microsegundos();
         t1=tb-ta;
 
         ta=microsegundos();
-        for(int i=0;i<k;i++){
-            aleatorio(vector,n);
+        for(count=0;count<k;count++){
+            funGen(vector,n);
         }
         tb=microsegundos();
         t2=tb-ta;
@@ -98,17 +102,18 @@ double testAlgoritmo(int vector[], int n, void (*func)(int[], int) ){
     return t;
 }
 
-void printChart(int n, void (*func)(int[], int),float cotaSub,float cotaAj,float cotaSob ){
+void printChart(void (*func)(int[], int),void (*funGen)(int[], int),float cotaSub,float cotaAj,float cotaSob ){
     double t =0;
     double tsub, taj, tsob;
+    int n;
 
     printf("\n");
 	printf("%7s%16s%18s%.2f%15s%.2f%15s%.2f \n",
             "n", "t(n)", "t(n)/n^", cotaSub, "t(n)/n^", cotaAj, "t(n)/n^", cotaSob);
 
-    for(int n = 500; n <= 32000; n*=2){
+    for(n = 500; n <= 32000; n*=2){
         int vector[n];
-        t = testAlgoritmo(vector, n, func);
+        t = testAlgoritmo(vector, n, func, funGen);
 
         tsub=t/pow(n,cotaSub);
 		taj=t/pow(n,cotaAj);
@@ -118,77 +123,64 @@ void printChart(int n, void (*func)(int[], int),float cotaSub,float cotaAj,float
 }
 
 void printVector(int v[], int n){
+    int i;
     printf("[");
-    for (int i=0; i<n;i++){
+    for (i=0; i<n;i++){
         printf("%3d", v[i]);
     }
     printf(" ]\n");
 }
 
 void descendente(int v[], int n){
-    int j=0;
-    for(int i=n;i>0;i--) {
+    int i,j=0;
+    for(i=n;i>0;i--) {
         j++;
         v[i-1]=j;
     }
 }
 
 void ascendente(int v[], int n){
-    for(int i=0;i<n;i++) {
+    int i;
+    for(i=0;i<n;i++) {
         v[i]=i;
     }
 }
+void testWithVector(void (*func)(int[], int),void (*funGen)(int[], int),int vector[],int  n){
+    funGen(vector, n);
+    printf("Input:\n");
+    printVector(vector, n);
+    printf("Output:\n");
+    func(vector, n);
+    printVector(vector, n);
+}
 
 int main(){
-
     int n=10;
     int v[n];
     inicializar_semilla();
 
-    aleatorio(v, n);
-    printf("Inicializacion aleatoria\n");
-    printVector(v, n);
-    printf("Ordenacion por seleccion\n");
-    ord_sel(v, n);
-    printVector(v, n);
-
+    printf("Ordenacion por seleccion con vector aleatorio\n");
+    testWithVector(ord_sel, aleatorio, v, n);
     printf("\n");
 
-    printf("Inicializacion aleatoria\n");
-    aleatorio(v, n);
-    printVector(v, n);
-    printf("Ordenacion por shell\n");
-    ord_shell(v, n);
-    printVector(v, n);
-
+    printf("Ordenacion por seleccion con vector descendente\n");
+    testWithVector(ord_sel, descendente, v, n);
     printf("\n");
 
-    descendente(v, n);
-    printVector(v, n);
-    printf("Ordenacion por seleccion\n");
-    ord_sel(v, n);
-    printVector(v, n);
-
+    printf("Ordenacion por shell con vector aleatorio\n");
+    testWithVector(ord_shell, aleatorio, v, n);
     printf("\n");
 
-    descendente(v, n);
-    printVector(v, n);
-    printf("Ordenacion por shell\n");
-    ord_shell(v, n);
-    printVector(v, n);
+    printf("Ordenacion por shell con vector descendente\n");
+    testWithVector(ord_shell, descendente, v, n);
+    printf("\n");
 
-    ascendente(v,n);
-    printChart(n,ord_shell,1.1,1.18,1.3);
-    descendente(v,n);
-    printChart(n,ord_shell, 1.1, 1.18, 1.3);
-    aleatorio(v,n);
-    printChart(n,ord_shell, 1.1, 1.18, 1.3);
+    printChart(ord_shell,ascendente, 1,1.14,1.3);
+    printChart(ord_shell,descendente, 1, 1.17, 1.3);
+    printChart(ord_shell,aleatorio, 1, 1.19, 1.3);
 
-    ascendente(v,n);
-    printChart(n,ord_sel, 1.8, 2, 2.2);
-    descendente(v,n);
-    printChart(n,ord_sel, 1.8, 2, 2.2);
-    aleatorio(v,n);
-    printChart(n,ord_sel, 1.8, 2, 2.2);
+    printChart(ord_sel,ascendente, 1.8, 2, 2.2);
+    printChart(ord_sel,descendente, 1.8, 2, 2.2);
+    printChart(ord_sel,aleatorio, 1.8, 1.98, 2.2);
     return 0;
 }

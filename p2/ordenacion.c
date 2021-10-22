@@ -185,14 +185,13 @@ int main(){
     printearTestAleatorios(ord_shell,v,n);
     printearAscenDescen(ord_shell,v,n);
 
-    printChart(ord_shell,ascendente, 1,1.14,1.3);
-    printChart(ord_shell,descendente, 1, 1.17, 1.3);
-    printChart(ord_shell,aleatorio, 1, 1.19, 1.3);
-
     printChart(ord_sel,ascendente, 1.8, 2, 2.2);
     printChart(ord_sel,descendente, 1.8, 2, 2.2);
     printChart(ord_sel,aleatorio, 1.8, 1.98, 2.2);
 
+    printChart(ord_shell,ascendente, 1,1.14,1.3);
+    printChart(ord_shell,descendente, 1, 1.17, 1.3);
+    printChart(ord_shell,aleatorio, 1, 1.19, 1.3);
 
     return 0;
 }

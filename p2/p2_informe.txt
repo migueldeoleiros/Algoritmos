@@ -1,15 +1,22 @@
 TITLE: Algoritmos Práctica 1
 AUTHOR 1: Miguel López López        LOGIN 1: m.llopez
-AUTHOR 2: Ángel Gómez prol          LOGIN 2: angel.gomez.prol
-AUTHOR 3: Xoel Díaz Préstamo        LOGIN 3: xoel.diaz
+AUTHOR 2: Xoel Díaz Pŕestamo        LOGIN 2: xoel.diaz
+AUTHOR 3: Ángel Gómez prol          LOGIN 3: angel.gomez.prol
 GROUP: 2.1.4
 DATE: 23/10/2021
 
 La práctica fue realizada con este dispositivo -->
 Máquina: Intel i5-7200U (4) @ 3.100GHz, Linux arch 5.14.5-arch1-1 (8GB RAM)
 
-         ORDENACION POR SELECCION 
-Input: [  2-10-10 -3 -6  2 -3  1  6 -8 ]
+La realización de esta práctica consiste en la implementación de los algoritmos
+   de ordenación por selección y ordenación por shell.
+
+En estos primeros tests, se ejecuta el algoritmo de ordenación por selección
+    para comprobar su funcionamiento,realizando 3 tests con vectores aleatorios
+    y uno con un vector ordenado decrecientemente.
+
+         ORDENACION POR SELECCION
+Input: [ 2-10-10 -3 -6  2 -3  1  6 -8 ]
 Output:[-10-10 -8 -6 -3 -3  1  2  2  6 ]
 
 Input: [ -3 -7 -9  3 -2 -8 -2 -5  7-10 ]
@@ -24,8 +31,9 @@ Output:[  1  2  3  4  5  6  7  8  9 10 ]
 Input: [  0  1  2  3  4  5  6  7  8  9 ]
 Output:[  0  1  2  3  4  5  6  7  8  9 ]
 
-        ***---------------***
-         ORDENACION SHELL 
+ Continuando por la ordenación por shell, de nuevo ejecutamos el algoritmo en
+    tres vectores aleatorios, y uno ordenado decrecientemente.
+         ORDENACION SHELL
 Input: [ 10 -3 -2 10  2  2  1  9-10 -5 ]
 Output:[-10 -5 -3 -2  1  2  2  9 10 10 ]
 
@@ -42,7 +50,90 @@ Input: [  0  1  2  3  4  5  6  7  8  9 ]
 Output:[  0  1  2  3  4  5  6  7  8  9 ]
 
 
-      n            t(n)           t(n)/n^1.00        t(n)/n^1.14        t(n)/n^1.30 
+  Atendiendo al enunciado de la práctica 2, nuestro trabajo consiste en realizar
+    la comprobación de la eficiencia y de los tiempos de ejecución de los
+    algoritmos implementados mediante vectores n, empezando en n=500 hasta
+    alcanzar los 32.000 elementos.
+
+A través de estas tablas, podemos determinar la complejidad computacional de
+   estos algoritmos, así como la verificación empírica de su complejidad
+   mediante las cotas sobre y subestimada.
+
+-NOTAS-
+   -El (*) situado a la izquierda de determinados valores significa que su tiempo de
+      ejecución es inferior a 500ms, por lo tanto ejecutamos un bucle el cual lo
+      repite 1000 veces y hallamos la media resultante.
+
+   -Todas las mediciones de tiempos están expresadas en microsegundos.
+
+
+Test de ordenación por selección con un vector ascendente
+         n            t(n)           t(n)/n^1.80        t(n)/n^2.00        t(n)/n^2.20
+   (*)   500         327.608          0.004542            0.001310          0.000378
+        1000        1291.000          0.005140            0.001291          0.000324
+        2000        5192.000          0.005936            0.001298          0.000284
+        4000       20723.000          0.006804            0.001295          0.000247
+        8000       82716.000          0.007799            0.001292          0.000214
+       16000      331803.000          0.008984            0.001296          0.000187
+       32000     1353621.000          0.010525            0.001322          0.000166
+
+Cota subestimada=n^1.80
+Cota sobrestimada=n^2.20
+Cota ajustada=n^2.00
+
+--OBSERVACIONES--
+  ++> El cociente entre nuestros tiempos y la cota subestimada es
+      estrictamente creciente
+  ++> El cociente entre nuestros tiempos y la cota sobrestimada es
+          estrictamente decreciente
+  ++> El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
+          un valor estable de 0.00129..
+
+Test de ordenación por selección con un vector descendente
+         n            t(n)           t(n)/n^1.80        t(n)/n^2.00        t(n)/n^2.20
+   (*)   500         370.630          0.005138            0.001483          0.000428
+        1000        1379.000          0.005490            0.001379          0.000346
+        2000        5522.000          0.006313            0.001380          0.000302
+        4000       22130.000          0.007266            0.001383          0.000263
+        8000       88759.000          0.008369            0.001387          0.000230
+       16000      387970.000          0.010505            0.001516          0.000219
+       32000     1545730.000          0.012019            0.001510          0.000190
+
+Cota subestimada=n^1.80
+Cota sobrestimada=n^2.20
+Cota ajustada=n^2.00
+
+--OBSERVACIONES--
+  ++> El cociente entre nuestros tiempos y la cota subestimada es
+    estrictamente creciente
+  ++> El cociente entre nuestros tiempos y la cota sobrestimada es
+        estrictamente decreciente
+  ++> El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
+        un valor estable de 0.0013..
+Test de ordenación por selección con el vector aleatorio1
+         n            t(n)           t(n)/n^1.80        t(n)/n^1.98        t(n)/n^2.20
+   (*)   500         355.051          0.004922            0.001608          0.000410
+        1000        1354.000          0.005390            0.001555          0.000340
+        2000        5361.000          0.006129            0.001560          0.000293
+        4000       20844.000          0.006843            0.001538          0.000248
+        8000       82782.000          0.007805            0.001548          0.000214
+       16000      331737.000          0.008982            0.001573          0.000187
+       32000     1377391.000          0.010710            0.001655          0.000169
+
+Cota subestimada=n^1.80
+Cota sobrestimada=n^1.98
+Cota ajustada=n^2.20
+
+--OBSERVACIONES--
+  ++> El cociente entre nuestros tiempos y la cota subestimada es
+    estrictamente creciente
+  ++> El cociente entre nuestros tiempos y la cota sobrestimada es
+        estrictamente decreciente
+  ++> El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
+        un valor estable de 0.0015..
+
+Test de ordenación por shell con un vector ascendente
+      n            t(n)           t(n)/n^1.00        t(n)/n^1.14        t(n)/n^1.30
 (*)   500          29.167          0.058334            0.024438          0.009041
 (*)  1000          41.849          0.041849            0.015911          0.005268
 (*)  2000          95.518          0.047759            0.016478          0.004884
@@ -51,7 +142,19 @@ Output:[  0  1  2  3  4  5  6  7  8  9 ]
     16000         915.000          0.057188            0.014748          0.003134
     32000        1961.000          0.061281            0.014342          0.002728
 
-      n            t(n)           t(n)/n^1.00        t(n)/n^1.17        t(n)/n^1.30 
+Cota subestimada=n^1.00
+Cota sobrestimada=n^1.14
+Cota ajustada=n^1.30
+
+--OBSERVACIONES--
+  ++> El cociente entre nuestros tiempos y la cota subestimada es
+    estrictamente creciente
+  ++> El cociente entre nuestros tiempos y la cota sobrestimada es
+        estrictamente decreciente
+  ++> El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
+        un valor estable de 0.00129..
+Test de ordenación por shell con un vector descendente
+      n            t(n)           t(n)/n^1.00        t(n)/n^1.17        t(n)/n^1.30
 (*)   500          26.941          0.053882            0.018733          0.008351
 (*)  1000          57.768          0.057768            0.017852          0.007273
 (*)  2000         123.081          0.061541            0.016904          0.006293
@@ -60,7 +163,19 @@ Output:[  0  1  2  3  4  5  6  7  8  9 ]
     16000        1272.000          0.079500            0.015334          0.004356
     32000        3233.000          0.101031            0.017321          0.004497
 
-      n            t(n)           t(n)/n^1.00        t(n)/n^1.19        t(n)/n^1.30 
+Cota subestimada=n^1.00
+Cota sobrestimada=n^1.17
+Cota ajustada=n^1.30
+
+--OBSERVACIONES--
+  ++> El cociente entre nuestros tiempos y la cota subestimada es
+    estrictamente creciente
+  ++> El cociente entre nuestros tiempos y la cota sobrestimada es
+        estrictamente decreciente
+  ++> El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
+        un valor estable de 0.00129..
+Test de ordenación por shell con el vector aleatorio1
+      n            t(n)           t(n)/n^1.00        t(n)/n^1.19        t(n)/n^1.30
 (*)   500          60.960          0.121920            0.037434          0.018897
 (*)  1000         140.941          0.140941            0.037935          0.017743
 (*)  2000         321.741          0.160870            0.037956          0.016450
@@ -69,29 +184,32 @@ Output:[  0  1  2  3  4  5  6  7  8  9 ]
     16000        3906.000          0.244125            0.038800          0.013378
     32000        8497.000          0.265531            0.036994          0.011819
 
-      n            t(n)           t(n)/n^1.80        t(n)/n^2.00        t(n)/n^2.20 
-(*)   500         327.608          0.004542            0.001310          0.000378
-     1000        1291.000          0.005140            0.001291          0.000324
-     2000        5192.000          0.005936            0.001298          0.000284
-     4000       20723.000          0.006804            0.001295          0.000247
-     8000       82716.000          0.007799            0.001292          0.000214
-    16000      331803.000          0.008984            0.001296          0.000187
-    32000     1353621.000          0.010525            0.001322          0.000166
+Cota subestimada=n^1.00
+Cota sobrestimada=n^1.19
+Cota ajustada=n^1.30
 
-      n            t(n)           t(n)/n^1.80        t(n)/n^2.00        t(n)/n^2.20 
-(*)   500         370.630          0.005138            0.001483          0.000428
-     1000        1379.000          0.005490            0.001379          0.000346
-     2000        5522.000          0.006313            0.001380          0.000302
-     4000       22130.000          0.007266            0.001383          0.000263
-     8000       88759.000          0.008369            0.001387          0.000230
-    16000      387970.000          0.010505            0.001516          0.000219
-    32000     1545730.000          0.012019            0.001510          0.000190
+---OBSERVACIONES---
+  ++> El cociente entre nuestros tiempos y la cota subestimada es
+    estrictamente creciente
+  ++> El cociente entre nuestros tiempos y la cota sobrestimada es
+        estrictamente decreciente
+  ++> El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
+        un valor estable de 0.037..
 
-      n            t(n)           t(n)/n^1.80        t(n)/n^1.98        t(n)/n^2.20 
-(*)   500         355.051          0.004922            0.001608          0.000410
-     1000        1354.000          0.005390            0.001555          0.000340
-     2000        5361.000          0.006129            0.001560          0.000293
-     4000       20844.000          0.006843            0.001538          0.000248
-     8000       82782.000          0.007805            0.001548          0.000214
-    16000      331737.000          0.008982            0.001573          0.000187
-    32000     1377391.000          0.010710            0.001655          0.000169
+---OBSERVACIONES GENERALES---
+   +Podemos afirmar que el algoritmo de ordenación por selección tiene una
+     complejidad computacional de n^1.98 en el caso de vectores aleatorios,
+     mientras que con los vectores ordenados ascendente y descendentemente,
+     posee una complejidad cuadrática, la cual es igual a la estimada.
+   +También podemos concluir que en el caso de la ordenación por shell, cuando
+     le proporcionamos un vector ascendente su complejidad computacional es
+     n^1.14, con un vector descendentemente ordenado sube hasta n^1.17 y cuando
+     es un vector aleatorio sigue aumentando hasta llegar a n^1.19, siendo las
+     tres ligeramente superiores a la estimada, la cual es n.
+
+---CONCLUSIONES---
+   <<La complejidad computacional de la ordenación por selección O(n^2) es mucho
+     mayor que la de ordenación por shell, la cual se sitúa alrededor de O(n),
+     dependiendo del vector.
+      Por lo tanto, en términos generales, usar el algoritmo de ordenación por
+      shell es una mejor opción>>

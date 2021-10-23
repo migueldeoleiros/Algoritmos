@@ -33,7 +33,7 @@ Output:[  0  1  2  3  4  5  6  7  8  9 ]
 
  Continuando por la ordenación por shell, de nuevo ejecutamos el algoritmo en
     tres vectores aleatorios, y uno ordenado decrecientemente.
-        
+
          ORDENACION SHELL
 Input: [ 10 -3 -2 10  2  2  1  9-10 -5 ]
 Output:[-10 -5 -3 -2  1  2  2  9 10 10 ]
@@ -68,9 +68,9 @@ Output:[  0  1  2  3  4  5  6  7  8  9 ]
    -Todas las mediciones de tiempos están expresadas en microsegundos.
 
 
-Ordenacion por selecion de vector ascendente:
+Ordenación por selección de vector ascendente:
 
-      n            t(n)           t(n)/n^1.80        t(n)/n^2.00        t(n)/n^2.20 
+      n            t(n)           t(n)/n^1.80        t(n)/n^2.00        t(n)/n^2.20
 (*)   500         326.059          0.004520            0.001304          0.000376
      1000        1290.000          0.005136            0.001290          0.000324
      2000        5152.000          0.005890            0.001288          0.000282
@@ -91,9 +91,9 @@ Cota ajustada=n^2
   ++> El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
           un valor estable de 0.00128..
 
-Ordenacion por selecion de vector descendente:
+Ordenación por selección de vector descendente:
 
-      n            t(n)           t(n)/n^1.80        t(n)/n^2.00        t(n)/n^2.20 
+      n            t(n)           t(n)/n^1.80        t(n)/n^2.00        t(n)/n^2.20
 (*)   500         350.310          0.004856            0.001401          0.000404
      1000        1380.000          0.005494            0.001380          0.000347
      2000        5494.000          0.006281            0.001373          0.000300
@@ -114,9 +114,9 @@ Cota ajustada=n^2
   ++> El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
         un valor estable de 0.00137..
 
-Ordenacion por selecion de vector aleatorio:
+Ordenación por selección de vector aleatorio:
 
-      n            t(n)           t(n)/n^1.80        t(n)/n^1.98        t(n)/n^2.20 
+      n            t(n)           t(n)/n^1.80        t(n)/n^1.98        t(n)/n^2.20
 (*)   500         351.662          0.004875            0.001593          0.000406
      1000        1350.000          0.005374            0.001550          0.000339
      2000        5279.000          0.006035            0.001536          0.000289
@@ -126,8 +126,8 @@ Ordenacion por selecion de vector aleatorio:
     32000     1319643.000          0.010261            0.001586          0.000162
 
 Cota subestimada=n^1.8
-Cota sobrestimada=n^1.98
-Cota ajustada=n^2.2
+Cota sobrestimada=n^2.2
+Cota ajustada=n^1.98
 
 --OBSERVACIONES--
   ++> El cociente entre nuestros tiempos y la cota subestimada es
@@ -136,13 +136,13 @@ Cota ajustada=n^2.2
         estrictamente decreciente
   ++> El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
         un valor estable de 0.0015..
-  ++>Encontramos que la funcion n^198 se acercaba mejor a los valores de nuestra
-        funcion pero solo unicamente con los vectores aleatorios. Esto se aleja 
-        muy ligeramente de la estimacion O(n2)
+  ++> Encontramos que la función n^1.98 se acercaba mejor a los valores de nuestra
+        función pero solo unicamente con los vectores aleatorios. Esto se aleja
+        muy ligeramente de la estimación O(n^2)
 
-Ordenacion por shell de vector ascendente:
+Ordenación por shell de vector ascendente:
 
-      n            t(n)           t(n)/n^1.00        t(n)/n^1.14        t(n)/n^1.30 
+      n            t(n)           t(n)/n^1.00        t(n)/n^1.14        t(n)/n^1.30
 (*)   500          16.828          0.033656            0.014100          0.005216
 (*)  1000          37.220          0.037220            0.014151          0.004686
 (*)  2000          83.569          0.041785            0.014417          0.004273
@@ -152,8 +152,8 @@ Ordenacion por shell de vector ascendente:
     32000        1949.000          0.060906            0.014254          0.002711
 
 Cota subestimada=n
-Cota sobrestimada=n^1.14
-Cota ajustada=n^1.3
+Cota sobrestimada=n^1.30
+Cota ajustada=n^1.14
 
 --OBSERVACIONES--
   ++> El cociente entre nuestros tiempos y la cota subestimada es
@@ -163,8 +163,8 @@ Cota ajustada=n^1.3
   ++> El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
         un valor estable de 0.0014..
 
-Ordenacion por shell de vector descendente:
-      n            t(n)           t(n)/n^1.00        t(n)/n^1.14        t(n)/n^1.30 
+Ordenación por shell de vector descendente:
+      n            t(n)           t(n)/n^1.00        t(n)/n^1.14        t(n)/n^1.30
 (*)   500          30.473          0.060946            0.025532          0.009446
 (*)  1000          54.329          0.054329            0.020655          0.006840
 (*)  2000         118.932          0.059466            0.020518          0.006081
@@ -174,12 +174,12 @@ Ordenacion por shell de vector descendente:
     32000        2737.000          0.085531            0.020017          0.003807
 
 Cota subestimada=n
-Cota sobrestimada=n^1.14
-Cota ajustada=n^1.3
+Cota sobrestimada=n^1.30
+Cota ajustada=n^1.14
 
 --OBSERVACIONES--
   ++> Tenemos dos valores anomalos en esta tabla. El primero con n=500 que nos dio
-        un resultado ligeramente superior al esperado y el ultimo cuando n=32000 
+        un resultado ligeramente superior al esperado y el ultimo cuando n=32000
         que nos dio un valor ligeramente inferior
   ++> El cociente entre nuestros tiempos y la cota subestimada es
     estrictamente creciente
@@ -188,9 +188,9 @@ Cota ajustada=n^1.3
   ++> El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
         un valor estable de 0.0205..
 
-Ordenacion por shell de vector aleatorio:
+Ordenación por shell de vector aleatorio:
 
-      n            t(n)           t(n)/n^1.00        t(n)/n^1.19        t(n)/n^1.30 
+      n            t(n)           t(n)/n^1.00        t(n)/n^1.19        t(n)/n^1.30
 (*)   500          59.508          0.119016            0.036543          0.018447
 (*)  1000         137.060          0.137060            0.036890          0.017255
 (*)  2000         313.538          0.156769            0.036988          0.016031
@@ -200,8 +200,8 @@ Ordenacion por shell de vector aleatorio:
     32000        8469.000          0.264656            0.036873          0.011780
 
 Cota subestimada=n
-Cota sobrestimada=n^1.19
-Cota ajustada=n^1.3
+Cota sobrestimada=n^1.30
+Cota ajustada=n^1.19
 
 ---OBSERVACIONES---
   ++> El cociente entre nuestros tiempos y la cota subestimada es
@@ -217,9 +217,9 @@ Cota ajustada=n^1.3
      mientras que con los vectores ordenados ascendente y descendentemente,
      posee una complejidad cuadrática, la cual es igual a la estimada.
    +También podemos concluir que en el caso de la ordenación por shell, cuando
-     le proporcionamos un vector ascendente o descendente su complejidad 
-     computacional es n^1.14 y cuando es un vector aleatorio aumenta hasta 
-     llegar a n^1.19, siendo las tres ligeramente superiores a la estimada, 
+     le proporcionamos un vector ascendente o descendente su complejidad
+     computacional es n^1.14 y cuando es un vector aleatorio aumenta hasta
+     llegar a n^1.19, siendo las tres ligeramente superiores a la estimada,
      la cual es O(n).
 
 ---CONCLUSIONES---

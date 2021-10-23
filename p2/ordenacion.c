@@ -53,18 +53,17 @@ void ord_shell(int v[], int n){
     do{
         incremento /= 2;
         for(i = incremento;i<n;i++){
-			tmp=v[i];
+            tmp=v[i];
             j=i;
             seguir=1;
-			while ((j-incremento>=0) && (seguir)){
-				if (tmp<v[j-incremento]){
-					v[j]=v[j-incremento];
-					j-=incremento;
-				}else seguir=0;
-			}
-			v[j]=tmp;
+            while ((j-incremento>=0) && (seguir)){
+                if (tmp<v[j-incremento]){
+                    v[j]=v[j-incremento];
+                    j-=incremento;
+                }else seguir=0;
+            }
+            v[j]=tmp;
         }
-
     }while(incremento != 1);
 }
 
@@ -116,9 +115,9 @@ void printChart(void (*func)(int[], int),void (*funGen)(int[], int),float cotaSu
         t = testAlgoritmo(vector, n, func, funGen);
 
         tsub=t/pow(n,cotaSub);
-		taj=t/pow(n,cotaAj);
-		tsob=t/pow(n,cotaSob);
-		printf("%6d%16.3f%18.6f%20.6f%18.6f\n", n, t, tsub, taj, tsob);
+        taj=t/pow(n,cotaAj);
+        tsob=t/pow(n,cotaSob);
+        printf("%6d%16.3f%18.6f%20.6f%18.6f\n", n, t, tsub, taj, tsob);
     }
 }
 
@@ -156,19 +155,18 @@ void testWithVector(void (*func)(int[], int),void (*funGen)(int[], int),int vect
 }
 
 void printearTestAleatorios(void (*func)(int[],int),int vector[],int n){
-  testWithVector(func, aleatorio, vector, n);
-  printf("\n");
-  testWithVector(func, aleatorio, vector, n);
-  printf("\n");
-  testWithVector(func, aleatorio, vector, n);
-  printf("\n");
+    int i;
+    for(i=0;i<4;i++){
+        testWithVector(func, aleatorio, vector, n);
+        printf("\n");
+    }
 }
 
 void printearAscenDescen(void (*func)(int[],int),int vector[],int n){
-  testWithVector(ord_sel, descendente, vector, n);
-  printf("\n");
-  testWithVector(ord_sel,ascendente,vector,n);
-  printf("\n");
+    testWithVector(ord_sel, descendente, vector, n);
+    printf("\n");
+    testWithVector(ord_sel,ascendente,vector,n);
+    printf("\n");
 
 }
 
@@ -177,27 +175,27 @@ int main(){
     int v[n];
     inicializar_semilla();
 
-    /* printf("\n%8s ORDENACION POR SELECCION \n",""); */
-    /* printearTestAleatorios(ord_sel,v,n); */
-    /* printearAscenDescen(ord_sel,v,n); */
-    /* printf("%8s***---------------***\n",""); */
-    /* printf("%10s ORDENACION SHELL \n",""); */
-    /* printearTestAleatorios(ord_shell,v,n); */
-    /* printearAscenDescen(ord_shell,v,n); */
+    printf("\n%8s ORDENACION POR SELECCION \n","");
+    printearTestAleatorios(ord_sel,v,n);
+    printearAscenDescen(ord_sel,v,n);
+    printf("%8s***---------------***\n","");
+    printf("%10s ORDENACION SHELL \n","");
+    printearTestAleatorios(ord_shell,v,n);
+    printearAscenDescen(ord_shell,v,n);
 
-    /* printf("\nOrdenacion por selecion de vector ascendente:"); */
-    /* printChart(ord_sel,ascendente, 1.8, 2, 2.2); */
-    /* printf("\nOrdenacion por selecion de vector descendente:"); */
-    /* printChart(ord_sel,descendente, 1.8, 2, 2.2); */
-    /* printf("\nOrdenacion por selecion de vector aleatorio:"); */
-    /* printChart(ord_sel,aleatorio, 1.8, 1.98, 2.2); */
+    printf("\nOrdenacion por selecion de vector ascendente:");
+    printChart(ord_sel,ascendente, 1.8, 2, 2.2);
+    printf("\nOrdenacion por selecion de vector descendente:");
+    printChart(ord_sel,descendente, 1.8, 2, 2.2);
+    printf("\nOrdenacion por selecion de vector aleatorio:");
+    printChart(ord_sel,aleatorio, 1.8, 1.98, 2.2);
 
-    /* printf("\nOrdenacion por shell de vector ascendente:"); */
-    /* printChart(ord_shell,ascendente, 1,1.14,1.3); */
+    printf("\nOrdenacion por shell de vector ascendente:");
+    printChart(ord_shell,ascendente, 1,1.14,1.3);
     printf("\nOrdenacion por shell de vector descendente:");
     printChart(ord_shell,descendente, 1, 1.14, 1.3);
-    /* printf("\nOrdenacion por shell de vector aleatorio:"); */
-    /* printChart(ord_shell,aleatorio, 1, 1.19, 1.3); */
+    printf("\nOrdenacion por shell de vector aleatorio:");
+    printChart(ord_shell,aleatorio, 1, 1.19, 1.3);
 
     return 0;
 }

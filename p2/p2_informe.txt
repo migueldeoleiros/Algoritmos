@@ -1,4 +1,4 @@
-TITLE: Algoritmos Práctica 1
+TITLE: Algoritmos Práctica 2
 AUTHOR 1: Miguel López López        LOGIN 1: m.llopez
 AUTHOR 2: Xoel Díaz Pŕestamo        LOGIN 2: xoel.diaz
 AUTHOR 3: Ángel Gómez prol          LOGIN 3: angel.gomez.prol

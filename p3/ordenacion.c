@@ -1,4 +1,4 @@
-// TITLE: Algoritmos Práctica 2
+// TITLE: Algoritmos Práctica 3
 // AUTHOR 1: Miguel López López        LOGIN 1: m.llopez
 // AUTHOR 2: Ángel Gómez prol          LOGIN 2: angel.gomez.prol
 // AUTHOR 3: Xoel Díaz Préstamo        LOGIN 3: xoel.diaz
@@ -30,43 +30,24 @@ double microsegundos() {  /* obtiene la hora del sistema en microsegundos */
     return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
-void ord_sel(int v[],int n){
-    int minj=0,minx=0;
-    int i,j;
-    for(i=0;i<n;i++){
-        minj=i;
-        minx=v[i];
-        for(j=i+1;j<n;j++){
-            if(v[j]<minx){
-    	    minj=j;
-            minx=v[j];
-            }
-        }
-        v[minj]=v[i];
-        v[i]=minx;
+void ordenacionPorInsercion(int v[],int n){
+  int x=0,i=0,j=0;
+    for(i=1;i<n;i++){
+      x=v[i];
+      j=i-1;
+      while(j>-1 && v[j]>x){
+        v[j+1]=v[j];
+        j=j-1;
+      }
+      v[j+1]=x;
     }
 }
 
-void ord_shell(int v[], int n){
-    int tmp,j,i,seguir;
-    int incremento = n;
-    do{
-        incremento /= 2;
-        for(i = incremento;i<n;i++){
-            tmp=v[i];
-            j=i;
-            seguir=1;
-            while ((j-incremento>=0) && (seguir)){
-                if (tmp<v[j-incremento]){
-                    v[j]=v[j-incremento];
-                    j-=incremento;
-                }else seguir=0;
-            }
-            v[j]=tmp;
-        }
-    }while(incremento != 1);
+void mediana3(int v[],int n){
+  int i=0,j=0,k=0;
+  k=(i+j)/2;
+  if(v[k]>v[j])
 }
-
 double testAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*funGen)(int[], int)){
     double ta=0,tb=0,t=0,t1=0,t2=0;
     int k=1000;
@@ -163,39 +144,30 @@ void printearTestAleatorios(void (*func)(int[],int),int vector[],int n){
 }
 
 void printearAscenDescen(void (*func)(int[],int),int vector[],int n){
-    testWithVector(ord_sel, descendente, vector, n);
+    testWithVector(ordenacionPorInsercion, descendente, vector, n);
     printf("\n");
-    testWithVector(ord_sel,ascendente,vector,n);
+    testWithVector(ordenacionPorInsercion,ascendente,vector,n);
     printf("\n");
 
 }
 
 int main(){
-    int n=10;
-    int v[n];
-    inicializar_semilla();
+  int n=10,v[n];
+  inicializar_semilla();
 
-    printf("\n%8s ORDENACION POR SELECCION \n","");
-    printearTestAleatorios(ord_sel,v,n);
-    printearAscenDescen(ord_sel,v,n);
-    printf("%8s***---------------***\n","");
-    printf("%10s ORDENACION SHELL \n","");
-    printearTestAleatorios(ord_shell,v,n);
-    printearAscenDescen(ord_shell,v,n);
+  printf("\n%8s ORDENACION POR INSERCION \n","");
+  printearTestAleatorios(ordenacionPorInsercion,v,n);
+  printearAscenDescen(ordenacionPorInsercion,v,n);
+  printf("%8s***---------------***\n","");
+  printf("%13s QUICKSORT \n","");
+  //printearTestAleatorios(quicksort,v,n);
+  //printearAscenDescen(quicksort,v,n);
 
-    printf("\nOrdenacion por selecion de vector ascendente:");
-    printChart(ord_sel,ascendente, 1.8, 2, 2.2);
-    printf("\nOrdenacion por selecion de vector descendente:");
-    printChart(ord_sel,descendente, 1.8, 2, 2.2);
-    printf("\nOrdenacion por selecion de vector aleatorio:");
-    printChart(ord_sel,aleatorio, 1.8, 1.98, 2.2);
+  printf("\nOrdenacion por insercion de vector ascendente:");
+  //printChart(ordenacionPorInsercion,ascendente, 1.8, 2, 2.2);
+  printf("\nOrdenacion por insercion de vector descendente:");
+  //printChart(ordenacionPorInsercion,descendente, 1.8, 2, 2.2);
+  printf("\nOrdenacion por insercon de vector aleatorio:");
+  //printChart(ordenacionPorInsercion,aleatorio, 1.8, 1.98, 2.2);
 
-    printf("\nOrdenacion por shell de vector ascendente:");
-    printChart(ord_shell,ascendente, 1,1.14,1.3);
-    printf("\nOrdenacion por shell de vector descendente:");
-    printChart(ord_shell,descendente, 1, 1.14, 1.3);
-    printf("\nOrdenacion por shell de vector aleatorio:");
-    printChart(ord_shell,aleatorio, 1, 1.19, 1.3);
-
-    return 0;
 }

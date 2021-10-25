@@ -10,6 +10,7 @@
 #include <time.h>
 #include <math.h>
 #include <sys/time.h>
+#define UMBRAL 1
 
 void inicializar_semilla(){
     srand(time(NULL));
@@ -42,13 +43,50 @@ void ordenacionPorInsercion(int v[],int n){
       v[j+1]=x;
     }
 }
-
-/*void mediana3(int v[],int n){
-  int i=0,j=0,k=0;
-  k=(i+j)/2;
-  if(v[k]>v[j])
+void intercambiar(int *a, int *b){
+  int aux;
+  aux=a;
+  a=b;
+  b=aux;
 }
-*/
+
+void mediana3(int v[],int n){
+  int i=0,j=n,k;
+  k=(i+j)/2;
+  if(v[k]>v[j]) intercambiar(v[k],v[j]);
+  if(v[k]>v[i]) intercambiar(v[k],v[i]);
+  if(v[i]>v[j]) intercambiar(v[i],v[j]);
+}
+
+void ordenarAux(int v[],int izq,int der){
+  int pivote=0,i=0,j=0;
+  if((izq+UMBRAL)<=der){
+    mediana3(v,der);
+    pivote= v[izq];
+    i=izq;
+    j=der;
+    do {
+      do{
+        i++;
+      }while(v[i]<pivote);
+      do{
+        j--;
+      }while (v[j]>pivote);
+      intercambiar(v[i],v[j]);
+    }while(j>i);
+    intercambiar(v[i],v[j]);
+    intercambiar(v[izq],v[j]);
+    ordenarAux(v,izq,j-1);
+    ordenarAux(v,j+1,der);
+  }
+}
+
+void quicksort(int v[],int n){
+  ordenarAux(v,0,n-1);
+  if(UMBRAL>1)
+    ordenacionPorInsercion(v,n);
+}
+
 double testAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*funGen)(int[], int)){
     double ta=0,tb=0,t=0,t1=0,t2=0;
     int k=1000;
@@ -145,9 +183,9 @@ void printearTestAleatorios(void (*func)(int[],int),int vector[],int n){
 }
 
 void printearAscenDescen(void (*func)(int[],int),int vector[],int n){
-    testWithVector(ordenacionPorInsercion, descendente, vector, n);
+    testWithVector(func, descendente, vector, n);
     printf("\n");
-    testWithVector(ordenacionPorInsercion,ascendente,vector,n);
+    testWithVector(func,ascendente,vector,n);
     printf("\n");
 
 }
@@ -161,14 +199,14 @@ int main(){
   printearAscenDescen(ordenacionPorInsercion,v,n);
   printf("%8s***---------------***\n","");
   printf("%13s QUICKSORT \n","");
-  //printearTestAleatorios(quicksort,v,n);
-  //printearAscenDescen(quicksort,v,n);
+  printearTestAleatorios(quicksort,v,n);
+  printearAscenDescen(quicksort,v,n);
 
   printf("\nOrdenacion por insercion de vector ascendente:");
   printChart(ordenacionPorInsercion,ascendente, 0.8, 1, 1.2);
   printf("\nOrdenacion por insercion de vector descendente:");
   printChart(ordenacionPorInsercion,descendente, 1.8, 2, 2.2);
-  printf("\nOrdenacion por insercon de vector aleatorio:");
+  printf("\nOrdenacion por insercion de vector aleatorio:");
   printChart(ordenacionPorInsercion,aleatorio, 1.8, 1.98, 2.2);
 
 }

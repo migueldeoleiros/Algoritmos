@@ -45,17 +45,17 @@ void ordenacionPorInsercion(int v[],int n){
 }
 void intercambiar(int *a, int *b){
   int aux;
-  aux=a;
-  a=b;
-  b=aux;
+  aux=*a;
+  *a=*b;
+  *b=aux;
 }
 
 void mediana3(int v[],int n){
   int i=0,j=n,k;
   k=(i+j)/2;
-  if(v[k]>v[j]) intercambiar(v[k],v[j]);
-  if(v[k]>v[i]) intercambiar(v[k],v[i]);
-  if(v[i]>v[j]) intercambiar(v[i],v[j]);
+  if(v[k]>v[j]) intercambiar(&v[k],&v[j]);
+  if(v[k]>v[i]) intercambiar(&v[k],&v[i]);
+  if(v[i]>v[j]) intercambiar(&v[i],&v[j]);
 }
 
 void ordenarAux(int v[],int izq,int der){
@@ -72,10 +72,10 @@ void ordenarAux(int v[],int izq,int der){
       do{
         j--;
       }while (v[j]>pivote);
-      intercambiar(v[i],v[j]);
+      intercambiar(&v[i],&v[j]);
     }while(j>i);
-    intercambiar(v[i],v[j]);
-    intercambiar(v[izq],v[j]);
+    intercambiar(&v[i],&v[j]);
+    intercambiar(&v[izq],&v[j]);
     ordenarAux(v,izq,j-1);
     ordenarAux(v,j+1,der);
   }
@@ -87,7 +87,7 @@ void quicksort(int v[],int n){
     ordenacionPorInsercion(v,n);
 }
 
-double testAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*funGen)(int[], int)){
+double tiemposAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*funGen)(int[], int)){
     double ta=0,tb=0,t=0,t1=0,t2=0;
     int k=1000;
     int count;
@@ -132,7 +132,7 @@ void printChart(void (*func)(int[], int),void (*funGen)(int[], int),float cotaSu
 
     for(n = 500; n <= 32000; n*=2){
         int vector[n];
-        t = testAlgoritmo(vector, n, func, funGen);
+        t = tiemposAlgoritmo(vector, n, func, funGen);
 
         tsub=t/pow(n,cotaSub);
         taj=t/pow(n,cotaAj);

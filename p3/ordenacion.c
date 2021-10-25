@@ -43,11 +43,12 @@ void ordenacionPorInsercion(int v[],int n){
     }
 }
 
-void mediana3(int v[],int n){
+/*void mediana3(int v[],int n){
   int i=0,j=0,k=0;
   k=(i+j)/2;
   if(v[k]>v[j])
 }
+*/
 double testAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*funGen)(int[], int)){
     double ta=0,tb=0,t=0,t1=0,t2=0;
     int k=1000;
@@ -164,10 +165,10 @@ int main(){
   //printearAscenDescen(quicksort,v,n);
 
   printf("\nOrdenacion por insercion de vector ascendente:");
-  //printChart(ordenacionPorInsercion,ascendente, 1.8, 2, 2.2);
+  printChart(ordenacionPorInsercion,ascendente, 0.8, 1, 1.2);
   printf("\nOrdenacion por insercion de vector descendente:");
-  //printChart(ordenacionPorInsercion,descendente, 1.8, 2, 2.2);
+  printChart(ordenacionPorInsercion,descendente, 1.8, 2, 2.2);
   printf("\nOrdenacion por insercon de vector aleatorio:");
-  //printChart(ordenacionPorInsercion,aleatorio, 1.8, 1.98, 2.2);
+  printChart(ordenacionPorInsercion,aleatorio, 1.8, 1.98, 2.2);
 
 }

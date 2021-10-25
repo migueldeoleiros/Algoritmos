@@ -50,8 +50,8 @@ void intercambiar(int *a, int *b){
   *b=aux;
 }
 
-void mediana3(int v[],int n){
-  int i=0,j=n,k;
+void mediana3(int v[],int i,int j){
+  int k;
   k=(i+j)/2;
   if(v[k]>v[j]) intercambiar(&v[k],&v[j]);
   if(v[k]>v[i]) intercambiar(&v[k],&v[i]);
@@ -61,7 +61,7 @@ void mediana3(int v[],int n){
 void ordenarAux(int v[],int izq,int der){
   int pivote=0,i=0,j=0;
   if((izq+UMBRAL)<=der){
-    mediana3(v,der);
+    mediana3(v,izq,der);
     pivote= v[izq];
     i=izq;
     j=der;

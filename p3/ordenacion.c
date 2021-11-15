@@ -1,7 +1,7 @@
 // TITLE: Algoritmos Práctica 3
 // AUTHOR 1: Miguel López López        LOGIN 1: m.llopez
-// AUTHOR 2: Ángel Gómez prol          LOGIN 2: angel.gomez.prol
-// AUTHOR 3: Xoel Díaz Préstamo        LOGIN 3: xoel.diaz
+// AUTHOR 2: Xoel Díaz Préstamo        LOGIN 3: xoel.diaz
+// AUTHOR 3: Ángel Gómez prol          LOGIN 2: angel.gomez.prol
 // GROUP: 2.1.4
 // DATE: 23/10/2021
 
@@ -82,7 +82,7 @@ void ordenarAux(int v[],int izq,int der){
 }
 
 void quicksort(int v[],int n){
-  ordenarAux(v,0,n);
+  ordenarAux(v,0,n-1);
   if(UMBRAL>1)
     ordenacionPorInsercion(v,n);
 }
@@ -130,7 +130,8 @@ void printChart(void (*func)(int[], int),void (*funGen)(int[], int),float cotaSu
 	printf("%7s%16s%18s%.2f%15s%.2f%15s%.2f \n",
             "n", "t(n)", "t(n)/n^", cotaSub, "t(n)/n^", cotaAj, "t(n)/n^", cotaSob);
 
-    for(n = 500; n <= 32000; n*=2){
+    t=0;
+    for(n = 500; n <= 128000 && t<500000; n*=2){
         int vector[n];
         t = tiemposAlgoritmo(vector, n, func, funGen);
 
@@ -202,18 +203,18 @@ int main(){
   printearTestAleatorios(quicksort,v,n);
   printearAscenDescen(quicksort,v,n);
 
-  //printf("\nOrdenacion por insercion de vector ascendente:");
-  //printChart(ordenacionPorInsercion,ascendente, 0.8, 1, 1.2);
-  //printf("\nOrdenacion por insercion de vector descendente:");
-  //printChart(ordenacionPorInsercion,descendente, 1.8, 2, 2.2);
-  //printf("\nOrdenacion por insercion de vector aleatorio:");
-  //printChart(ordenacionPorInsercion,aleatorio, 1.8, 1.98, 2.2);
-  printf("\nOrdenacion por quicksort de vector ascendente:");        //PEOR CASO = n^2
-  printChart(quicksort,ascendente,1.6,1.75,2.2);                                  //MEJOR CASO Y CASO AVG = n*(log(n))
+  printf("\nOrdenacion por insercion de vector ascendente:");
+  printChart(ordenacionPorInsercion,ascendente, 0.85, 1, 1.2);
+  printf("\nOrdenacion por insercion de vector descendente:");
+  printChart(ordenacionPorInsercion,descendente, 1.8, 2, 2.2);
+  printf("\nOrdenacion por insercion de vector aleatorio:");
+  printChart(ordenacionPorInsercion,aleatorio, 1.8, 1.98, 2.2);
+  
+  printf("\nOrdenacion por quicksort de vector ascendente:");
+  printChart(quicksort,ascendente,0.8,1.08,1.6);
   printf("\nOrdenacion por quicksort de vector descendente:");
-  printChart(quicksort,descendente,1.4,1.81,2.1);
-  //printf("\nOrdenacion por quicksort de vector aleatorio:");
-  //printChart(quicksort,aleatorio,)
-
+  printChart(quicksort,descendente,0.8,1.08,1.6);
+  printf("\nOrdenacion por quicksort de vector aleatorio:");
+  printChart(quicksort,aleatorio,0.8,1.1,1.6);
 
 }

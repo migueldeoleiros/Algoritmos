@@ -209,7 +209,7 @@ int main(){
   printChart(ordenacionPorInsercion,descendente, 1.8, 2, 2.2);
   printf("\nOrdenacion por insercion de vector aleatorio:");
   printChart(ordenacionPorInsercion,aleatorio, 1.8, 1.98, 2.2);
-  
+
   printf("\nOrdenacion por quicksort de vector ascendente:");
   printChart(quicksort,ascendente,0.8,1.08,1.6);
   printf("\nOrdenacion por quicksort de vector descendente:");

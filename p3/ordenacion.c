@@ -3,7 +3,7 @@
 // AUTHOR 2: Xoel Díaz Préstamo        LOGIN 3: xoel.diaz
 // AUTHOR 3: Ángel Gómez prol          LOGIN 2: angel.gomez.prol
 // GROUP: 2.1.4
-// DATE: 20/11/2021
+// DATE: 20/1 /2021
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -213,7 +213,7 @@ int main(){
   printf("\nOrdenacion por quicksort de vector ascendente:");
   printChart(quicksort,ascendente,0.8,1.08,1.6);
   printf("\nOrdenacion por quicksort de vector descendente:");
-  printChart(quicksort,descendente,0.8,1.08,1.6);
+  printChart(quicksort,descendente,0.8,1.09,1.6);
   printf("\nOrdenacion por quicksort de vector aleatorio:");
   printChart(quicksort,aleatorio,0.8,1.1,1.6);
 

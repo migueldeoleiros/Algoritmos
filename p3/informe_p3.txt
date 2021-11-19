@@ -8,7 +8,14 @@ DATE: 20/11/2021
 La práctica fue realizada con este dispositivo -->
 Máquina: Intel i5-7200U (4) @ 3.100GHz, Linux arch 5.15.2-arch1-1 (8GB RAM)
 
-         ORDENACION POR INSERCION 
+La realización de esta practica consiste en la implementación de los algoritmos
+    de ordenación por inserción y quicksort.
+
+En estos primeros tests, se ejecuta el algoritmo de ordenación por inserción
+    para comprobar su funcionamiento,realizando 3 tests con vectores aleatorios,
+    uno con un vector ordenado decrecientemente y otro ordenado ascendentemente.
+
+         ORDENACIÓN POR INSERCIÓN
 Input: [  4  4 10 -9 -6 -5 -2  7 -5 -8 ]
 Output:[ -9 -8 -6 -5 -5 -2  4  4  7 10 ]
 
@@ -28,7 +35,11 @@ Input: [  0  1  2  3  4  5  6  7  8  9 ]
 Output:[  0  1  2  3  4  5  6  7  8  9 ]
 
         ***---------------***
-              QUICKSORT 
+
+ Continuando con quicksort,de nuevo ejecutamos en tres
+    vectores aleatorios,uno ascendente y otro descendente.
+
+              QUICKSORT
 Input: [-10 10 -3  7  0 -7 -9  4  7  2 ]
 Output:[-10 -9 -7 -3  0  2  4  7  7 10 ]
 
@@ -47,8 +58,28 @@ Output:[  1  2  3  4  5  6  7  8  9 10 ]
 Input: [  0  1  2  3  4  5  6  7  8  9 ]
 Output:[  0  1  2  3  4  5  6  7  8  9 ]
 
-Ordenacion por insercion de vector ascendente:
-      n            t(n)           t(n)/n^0.85        t(n)/n^1.00        t(n)/n^1.20 
+
+ Atendiendo al enunciado de la practica 3,nuestro trabajo consiste en realizar
+    la comprobación de la eficiencia y los tiempos de ejecución de los
+    algoritmos implementados mediante vectores de n elementos, empezando en
+    n=500 hasta n=32000,y excepcionalmente hasta n=128000 cuando t(n) es
+    menor que 500.000 microsegundos.
+
+ A través de estas tablas, podemos determinar la complejidad computacional de
+    estos algoritmos,así como la verificación empírica de su complejidad
+    mediante las cotas sobre y subestimada.
+
+-NOTAS-
+    +El (*) situado a la izquierda de determinados valores indica que su tiempo
+        de ejecución es inferior a 500 microsegundos, por tanto ejecutamos un
+        bucle el cual lo repite 1000 veces y hallamos la media resultante.
+
+    +Todas las mediciones de tiempos están expresadas en microsegundos.
+
+
+Ordenación por inserción de vector ascendente:
+
+      n            t(n)           t(n)/n^0.85        t(n)/n^1.00        t(n)/n^1.20
 (*)   500           1.963          0.009972            0.003926          0.001133
 (*)  1000           3.877          0.010927            0.003877          0.000974
 (*)  2000           7.566          0.011830            0.003783          0.000827
@@ -59,8 +90,20 @@ Ordenacion por insercion de vector ascendente:
 (*) 64000         244.526          0.020094            0.003821          0.000418
 (*)128000         489.669          0.022324            0.003826          0.000364
 
-Ordenacion por insercion de vector descendente:
-      n            t(n)           t(n)/n^1.80        t(n)/n^2.00        t(n)/n^2.20 
+Cota subestimada=n^0.85
+Cota sobrestimada=n^1.2
+Cota ajustada=n^1.0
+
+--OBSERVACIONES--
+  +El cociente entre nuestros tiempos y la cota subestimada es
+    estrictamente creciente.
+  +El cociente entre nuestros tiempos y la cota sobrestimada es
+    estrictamente decreciente.
+  +El cociente entre nuestros tiempos y la cota ajustada se
+    sitúa próximo a un valor estable de 0.0038..
+
+Ordenación por inserción de vector descendente:
+      n            t(n)           t(n)/n^1.80        t(n)/n^2.00        t(n)/n^2.20
 (*)   500         354.465          0.004914            0.001418          0.000409
      1000        1412.000          0.005621            0.001412          0.000355
      2000        5639.000          0.006447            0.001410          0.000308
@@ -69,13 +112,38 @@ Ordenacion por insercion de vector descendente:
     16000      362675.000          0.009820            0.001417          0.000204
     32000     1452051.000          0.011290            0.001418          0.000178
 
-Ordenacion por insercion de vector aleatorio:
-      n            t(n)           t(n)/n^1.80        t(n)/n^1.98        t(n)/n^2.20 
+Cota subestimada=n^1.8
+Cota sobrestimada=n^2.2
+Cota ajustada=n^2
+
+--OBSERVACIONES--
+  +El cociente entre nuestros tiempos y la cota subestimada es
+    estrictamente creciente.
+  +El cociente entre nuestros tiempos y la cota sobrestimada es
+    estrictamente decreciente.
+  +El cociente entre nuestros tiempos y la cota ajustada se
+    sitúa próximo a un valor estable de 0.00141..
+
+Ordenación por inserción de vector aleatorio:
+      n            t(n)           t(n)/n^1.80        t(n)/n^1.98        t(n)/n^2.20
 (*)   500         182.284          0.002527            0.000826          0.000210
      1000         723.000          0.002878            0.000830          0.000182
      2000        2910.000          0.003327            0.000847          0.000159
      4000       11336.000          0.003722            0.000836          0.000135
      8000       45325.000          0.004273            0.000848          0.000117
-    16000      182722.000          0.004947            0.000866          0.000103
+    16000      182722.000          0.004947            0.000836          0.000103
     32000      728824.000          0.005667            0.000876          0.000089
 
+Cota subestimada=n^1.8
+Cota sobrestimada=n^2.2
+Cota ajustada=n^1.98
+
+--OBSERVACIONES--
+  +El cociente entre nuestros tiempos y la cota subestimada es
+    estrictamente creciente.
+  +El cociente entre nuestros tiempos y la cota sobrestimada es
+    estrictamente decreciente.
+  +El cociente entre nuestros tiempos y la cota ajustada se
+    sitúa próximo a un valor estable de 0.00083.. a excepción
+    del vector con 32.000 elementos,donde tenemos una ligera
+    ANOMALÍA.

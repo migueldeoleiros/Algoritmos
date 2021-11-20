@@ -6,7 +6,10 @@ GROUP: 2.1.4
 DATE: 20/11/2021
 
 La práctica fue realizada con este dispositivo -->
-Máquina: Intel i5-7200U (4) @ 3.100GHz, Linux arch 5.15.2-arch1-1 (8GB RAM)
+Máquina: Intel i5-7200U (4) @ 3.100GHz (8GB RAM)
+OS:      Arch linux x86_64 
+Kernel:  5.15.2-arch1-1 
+         
 
 La realización de esta practica consiste en la implementación de los algoritmos
     de ordenación por inserción y quicksort.
@@ -64,6 +67,9 @@ Output:[  0  1  2  3  4  5  6  7  8  9 ]
     algoritmos implementados mediante vectores de n elementos, empezando en
     n=500 hasta n=32000,y excepcionalmente hasta n=128000 cuando t(n) es
     menor que 500.000 microsegundos.
+
+ También compararemos el funcionamiento de quicksort con diferentes umbrales,
+    siendo estos 1(no se ejecuta inserción), 10 y 100.
 
  A través de estas tablas, podemos determinar la complejidad computacional de
     estos algoritmos,así como la verificación empírica de su complejidad
@@ -148,17 +154,17 @@ Cota ajustada=n^1.98
     del vector con 32.000 elementos,donde tenemos una ligera
     ANOMALÍA.
 
-Ordenacion por quicksort de vector ascendente umbral 10:
-      n            t(n)           t(n)/n^0.80        t(n)/n^1.08        t(n)/n^1.60
-(*)   500          12.214          0.084661            0.014858          0.000587
-(*)  1000          21.777          0.086696            0.012531          0.000345
-(*)  2000          47.973          0.109691            0.013058          0.000251
-(*)  4000         104.253          0.136912            0.013423          0.000180
-(*)  8000         226.117          0.170554            0.013772          0.000129
-(*) 16000         485.475          0.210315            0.013987          0.000091
-    32000        1046.000          0.260263            0.014255          0.000065
-    64000        2221.000          0.317398            0.014318          0.000045
-   128000        4708.000          0.386428            0.014357          0.000032
+Ordenacion por quicksort de vector ascendente umbral 1:
+      n            t(n)           t(n)/n^0.80        t(n)/n^1.08        t(n)/n^1.60 
+(*)   500          16.174          0.112109            0.019676          0.000777
+(*)  1000          31.557          0.125631            0.018159          0.000500
+(*)  2000          66.921          0.153017            0.018216          0.000350
+(*)  4000         141.853          0.186290            0.018265          0.000245
+(*)  8000         300.356          0.226550            0.018294          0.000171
+    16000         633.000          0.274225            0.018237          0.000119
+    32000        1336.000          0.332419            0.018207          0.000083
+    64000        2811.000          0.401714            0.018121          0.000057
+   128000        5951.000          0.488452            0.018147          0.000040
 
 Cota subestimada=n^0.8
 Cota sobrestimada=n^1.6
@@ -170,9 +176,10 @@ Cota ajustada=n^1.08
   +El cociente entre nuestros tiempos y la cota sobrestimada es
     estrictamente decreciente.
   +El cociente entre nuestros tiempos y la cota ajustada se
-    sitúa próximo a un valor estable de 0.0014..a excepción
-    del vector con 1.000 elementos,donde tenemos una ligera
-    ANOMALÍA.
+    sitúa próximo a un valor estable de 0.0018..a excepción
+    del vector con 500 elementos,donde tenemos una ligera
+    ANOMALÍA que solo fuimos capaces de reducir subiendo la 
+    prioridad del proceso en cpu.
 
 Ordenacion por quicksort de vector descendente umbral 1:
       n            t(n)           t(n)/n^0.80        t(n)/n^1.09        t(n)/n^1.60
@@ -300,7 +307,7 @@ Ordenacion por quicksort de vector ascendente umbral 100:
 (*)  1000          18.615          0.074108            0.010712          0.000295
 (*)  2000          39.240          0.089723            0.010681          0.000205
 (*)  4000          68.496          0.089953            0.009819          0.000118
-(*)  8000         153.953          0.116122            0.009377          0.000088
+(*)  8000         154.898          0.116835            0.009434          0.000088
 (*) 16000         341.931          0.148130            0.009851          0.000064
     32000         752.000          0.187110            0.010248          0.000047
     64000        1639.000          0.234226            0.010566          0.000033
@@ -316,7 +323,9 @@ Cota ajustada=n^1.08
   +El cociente entre nuestros tiempos y la cota sobrestimada es
     estrictamente decreciente.
   +El cociente entre nuestros tiempos y la cota ajustada se
-    sitúa próximo a un valor estable de 0.01..
+    sitúa próximo a un valor estable de 0.010.. a excepcion del
+    vector con 8000 elementos que nos da un valor anómalo 
+    ligeramente inferior.
 
 Ordenacion por quicksort de vector descendente umbral 100:
       n            t(n)           t(n)/n^0.80        t(n)/n^1.09        t(n)/n^1.60
@@ -367,12 +376,14 @@ Cota ajustada=n^1.10
   +El cociente entre nuestros tiempos y la cota ajustada se
     sitúa próximo a un valor estable de 0.047..
 
+
 ---OBSERVACIONES GENERALES---
    +Podemos afirmar que el algoritmo de ordenación por inserción tiene una
       complejidad computacional de n^1.98 en el caso de vectores aleatorios,
-      la cual es ligeramente inferior a la teórica (n^2), la cual es la
-      complejidad del algoritmo si el vector es descendente,mientras que si ya
-      está ordenado esta disminuye hasta n.
+      la cual es ligeramente inferior a la teórica (n^2), que justamente es 
+      la complegidad si el vector esta ordenado descendentemente, mientras 
+      que si ya está ordenado esta disminuye hasta n.
+
    +También podemos concluir que en el caso de la ordenación quicksort,cuando
       le proporcionamos un vector ascendente su complejidad computacional
       es n^1.08,cuando está ordenado descendentemente es n^1.09 y cuando es un
@@ -380,13 +391,22 @@ Cota ajustada=n^1.10
       obtenidos son mejores que la complejidad teórica, la cual es n*log(n).
 
 ---CONCLUSIONES---
-++En términos de velocidad,la ordenación quicksort es mucho más rápida que la
-    ordenación por inserción,ya que esta última se sitúa en O(n^1.98) para
-    vectores aleatorios,mientras que quicksort tiene O(n^1.1).Solo hay una
-    excepción,cuando el vector ya está ordenado,en ese caso,la ordenación por
-    inserción es más veloz.
-++En quicksort,con un vector ordenado ascendentemente,el umbral más rápido es
-    100,mientras que con el umbral 1 obtenemos los peores resultados,siendo igual
-    para el caso en el que el vector está ordenado descendentemente.Por último,en
-    el caso de los vectores aleatorios podemos observar que el mejor umbral es el
-    umbral 10,y tanto el umbral 100 y el 1 obtienen resultados similares.
+  ++Comparando los diferentes caso de cada algoritmo entre si podemos ver que el
+      mejor caso de inserción es cuando el vector ya está ordenado, y el peor es
+      cuando este está ordenado descendentemente, el aleatorio se situa en un punto
+      medio entre ambos casos. Para quicksort el mejor caso también será cuando este
+      está ordenado, seguido del vector decreciente y por último el aleatorio.
+
+  ++En términos de velocidad,la ordenación quicksort es mucho más rápida que la
+      ordenación por inserción tanto para vectores ordenados aleatoriamente como
+      para vectores ordenados descendentemente, esto es todo lo contrario para el
+      caso restante. Cuando el vector ya está ordenado inserción funciona mucho
+      más rápido, y es precisamente por eso que lo usaremos junto con quicksort
+      con los umbrales de 10 y 100.
+
+  ++En quicksort,con un vector ordenado ascendentemente,el umbral más rápido es
+      100, mientras que con el umbral 1 obtenemos los peores resultados, siendo
+      igual para el caso en el que el vector está ordenado descendentemente.
+      Por último, en el caso de los vectores aleatorios podemos observar que el
+      mejor umbral es el umbral 10, y tanto el umbral 100 como el 1 obtienen
+      resultados similares.

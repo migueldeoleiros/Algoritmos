@@ -3,7 +3,7 @@
 // AUTHOR 2: Ángel Gómez prol          LOGIN 2: angel.gomez.prol
 // AUTHOR 3: Xoel Díaz Préstamo        LOGIN 3: xoel.diaz
 // GROUP: 2.1.4
-// DATE: 22/11/2021
+// DATE: 07/12/2021
 
 #include <stdio.h>
 #include <stdlib.h>

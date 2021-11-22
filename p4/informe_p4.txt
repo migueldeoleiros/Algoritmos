@@ -1,0 +1,16 @@
+TITLE: Algoritmos Práctica 4
+AUTHOR 1: Miguel López López        LOGIN 1: m.llopez
+AUTHOR 2: Xoel Díaz Pŕestamo        LOGIN 2: xoel.diaz
+AUTHOR 3: Ángel Gómez prol          LOGIN 3: angel.gomez.prol
+GROUP: 2.1.4
+DATE: 07/12/2021
+
+La práctica fue realizada con este dispositivo -->
+Máquina: Intel i5-7200U (4) @ 3.100GHz (8GB RAM)
+OS:      Arch linux x86_64 
+Kernel:  5.15.3-arch1-1 
+         
+
+La realización de esta practica consiste en la implementación del algoritmo
+    de prim para hallar el árbol de recubrimiento mínimo en una cola.
+

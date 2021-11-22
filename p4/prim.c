@@ -123,10 +123,23 @@ void prim(matriz m, int nodos, cola *aristas) {
         masProximo[i] = 0;
         distanciaMinima[i] = m[i][0];
     }
-/*
-...
-*/
+    for(i=1;i<nodos;i++){
+      min=99;
+      for(j=1;j<nodos;j++){
+        if(0<=distanciaMinima[j]<min){
+          min=distanciaMinima[j];
+          k=j;
+        }
+      }
+      insertar(masProximo[k],aristas);
+      distanciaMinima[k]=-1;
+      for(j=1;j<nodos;j++){
+        if(m[j,k]<distanciaMinima[j]){
+          distanciaMinima[j]=m[j,k];
+          masProximo[j]=k;
+        }
+      }
+    }
     free(masProximo);
     free(distanciaMinima);
 }
-

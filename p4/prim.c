@@ -156,6 +156,10 @@ void prim(matriz m, int nodos, cola *aristas) {
     free(distanciaMinima);
 }
 int main(){
+    cola *aristas = malloc(sizeof(cola));
+    crear_cola(aristas);
+    matriz m=crear_matriz(10);
+
     int n=5;
     int a[5][5]={
         {0,1,8,4,7},
@@ -164,18 +168,45 @@ int main(){
         {4,6,9,0,3},
         {7,5,5,3,0},
     };
-    matriz m=crear_matriz(5);
-    for(int i=0;i<5;i++){
-        for(int j=0;j<5;j++)
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++)
             m[i][j]=a[i][j];
     }
-    //inicializar_matriz(m,n);
 
-    cola *aristas = malloc(sizeof(cola));
-    crear_cola(aristas);
-    
     prim(m,n,aristas);
+    mostrar_cola(*aristas);
 
+    n=4;
+    int a2[4][4]= {
+        {0,1,4,7},
+        {1,0,2,8},
+        {4,2,0,3},
+        {7,8,3,0},
+    };
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++)
+            m[i][j]=a2[i][j];
+    }
+
+    prim(m,n,aristas);
+    mostrar_cola(*aristas);
+
+    n=7;
+    int a3[7][7]= {
+        { 0, 7,99, 5,99,99,99},
+        { 7, 0, 8, 9, 7,99,99},
+        {99, 8, 0,99, 5,99,99},
+        { 5, 9,99, 0,15, 6,99},
+        {99, 7, 5,15, 0, 8, 9},
+        {99,99,99, 6, 8, 0,11},
+        {99,99,99,99, 9,11, 0}
+    };
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++)
+            m[i][j]=a3[i][j];
+    }
+
+    prim(m,n,aristas);
     mostrar_cola(*aristas);
 
     liberar_matriz(m,n);

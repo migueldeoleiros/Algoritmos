@@ -125,6 +125,7 @@ void printChart(void (*func)(int[], int),void (*funGen)(int[], int),float cotaSu
     double t =0;
     double tsub, taj, tsob;
     int n;
+    int vector[128000];
 
     printf("\n");
     printf("%7s%16s%18s%.2f%15s%.2f%15s%.2f \n",
@@ -132,7 +133,6 @@ void printChart(void (*func)(int[], int),void (*funGen)(int[], int),float cotaSu
 
     t=0;
     for(n = 500; n <= 128000 && t<500000; n*=2){
-        int vector[n];
         t = tiemposAlgoritmo(vector, n, func, funGen);
 
         tsub=t/pow(n,cotaSub);

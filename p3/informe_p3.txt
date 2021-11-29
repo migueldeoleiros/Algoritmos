@@ -381,7 +381,7 @@ Cota ajustada=n^1.10
    +Podemos afirmar que el algoritmo de ordenación por inserción tiene una
       complejidad computacional de n^1.98 en el caso de vectores aleatorios,
       la cual es ligeramente inferior a la teórica (n^2), que justamente es 
-      la complegidad si el vector esta ordenado descendentemente, mientras 
+      la complejidad si el vector esta ordenado descendentemente, mientras 
       que si ya está ordenado esta disminuye hasta n.
 
    +También podemos concluir que en el caso de la ordenación quicksort,cuando

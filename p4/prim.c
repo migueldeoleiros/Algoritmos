@@ -111,8 +111,6 @@ void liberar_matriz(matriz m, int n) {
 }
 
 void prim(matriz m, int nodos, cola *aristas) {
-    /* calcular el árbol de recubrimiento mínimo devolviendo
-       las aristas del arbol en la cola ’aristas’ */
     int min, i, j, k=0;
     arista a;
     int *masProximo = (int *) malloc(nodos*sizeof(int));
@@ -126,20 +124,52 @@ void prim(matriz m, int nodos, cola *aristas) {
     for(i=1;i<nodos;i++){
       min=99;
       for(j=1;j<nodos;j++){
-        if(0<=distanciaMinima[j]<min){
+        if(0<=distanciaMinima[j] && distanciaMinima[j]<min){
           min=distanciaMinima[j];
           k=j;
         }
       }
-      insertar(masProximo[k],aristas);
+      a.x=k;
+      a.y=masProximo[k];
+      a.peso=m[k][masProximo[k]];
+      insertar(a,aristas);
       distanciaMinima[k]=-1;
       for(j=1;j<nodos;j++){
-        if(m[j,k]<distanciaMinima[j]){
-          distanciaMinima[j]=m[j,k];
+        if(m[j][k]<distanciaMinima[j]){
+          distanciaMinima[j]=m[j][k];
           masProximo[j]=k;
         }
       }
     }
     free(masProximo);
     free(distanciaMinima);
+}
+int main(){
+  int n=5;
+  int pesoTotal=0;
+  int a[5][5]={
+    {0,1,8,4,7},
+    {1,0,2,6,5},
+    {8,2,0,9,5},
+    {4,6,9,0,3},
+    {7,5,5,3,0},
+  };
+  cola *aristas = malloc(sizeof(cola));
+  crear_cola(aristas);
+  int **m=crear_matriz(5);
+  for(int i=0;i<5;i++){
+    for(int j=0;j<5;j++)
+        m[i][j]=a[i][j];
+  }
+  //inicializar_matriz(m,n);
+  prim(m,n,aristas);
+  for(int i=0;i<n;i++){
+    printf("(%d,",aristas->vector[i].y);
+    printf("%d)",aristas->vector[i].x);
+    pesoTotal+=aristas->vector[i].peso;
+  }
+  printf("Peso: %d\n",pesoTotal);
+  printf("\n");
+  liberar_matriz(m,n);
+
 }

@@ -9,9 +9,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <limits.h>
 #include <sys/time.h>
 
-#define TAM_MAX 1600
+#define TAM_MAX 8000 
 typedef int ** matriz;
 typedef struct {
     int x, y, peso;
@@ -133,7 +134,7 @@ void prim(matriz m, int nodos, cola *aristas) {
         distanciaMinima[i] = m[i][0];
     }
     for(i=1;i<nodos;i++){
-        min=99;
+        min=INT_MAX;
         for(j=1;j<nodos;j++){
             if(0<=distanciaMinima[j] && distanciaMinima[j]<min){
                 min=distanciaMinima[j];
@@ -155,12 +156,71 @@ void prim(matriz m, int nodos, cola *aristas) {
     free(masProximo);
     free(distanciaMinima);
 }
-int main(){
+
+double tiemposAlgoritmo(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
+                        matriz matriz, int n, cola cola){
+    double ta=0,tb=0,t=0,t1=0,t2=0;
+    int k=1000;
+    int count;
+
+    funGen(matriz,n);
+
+    ta=microsegundos();
+    func(matriz, n, &cola);
+    tb=microsegundos();
+    t=tb-ta;
+
+    if(t<500){
+
+        ta=microsegundos();
+        for(count=0;count<k;count++){
+            funGen(matriz,n);
+            func(matriz, n, &cola);
+        }
+        tb=microsegundos();
+        t1=tb-ta;
+
+        ta=microsegundos();
+        for(count=0;count<k;count++){
+            funGen(matriz,n);
+        }
+        tb=microsegundos();
+        t2=tb-ta;
+        t=(t1-t2)/k;
+        printf("(*)");
+    }else printf("   ");
+    return t;
+}
+
+void printChart(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
+                float cotaSub,float cotaAj,float cotaSob ){
+    double t =0;
+    double tsub, taj, tsob;
+    int n;
+    matriz m= crear_matriz(8000);
     cola *aristas = malloc(sizeof(cola));
     crear_cola(aristas);
-    matriz m=crear_matriz(10);
 
+    printf("\n");
+    printf("%7s%16s%18s%.2f%15s%.2f%15s%.2f \n",
+            "V", "t(V)", "t(V)/V^", cotaSub, "t(V)/V^", cotaAj, "t(V)/V^", cotaSob);
+
+    t=0;
+    for(n = 50; n <= 128000 && t<500000; n*=2){
+        t = tiemposAlgoritmo(func, funGen, m, n, *aristas);
+
+        tsub=t/pow(n,cotaSub);
+        taj=t/pow(n,cotaAj);
+        tsob=t/pow(n,cotaSob);
+        printf("%6d%16.3f%18.6f%20.6f%18.6f\n", n, t, tsub, taj, tsob);
+    }
+    free(aristas);
+}
+
+void testMatriz1(cola *aristas){
     int n=5;
+    matriz m=crear_matriz(n);
+
     int a[5][5]={
         {0,1,8,4,7},
         {1,0,2,6,5},
@@ -175,8 +235,11 @@ int main(){
 
     prim(m,n,aristas);
     mostrar_cola(*aristas);
+}
 
-    n=4;
+void testMatriz2(cola *aristas){
+    int n=4;
+    matriz m=crear_matriz(n);
     int a2[4][4]= {
         {0,1,4,7},
         {1,0,2,8},
@@ -190,8 +253,10 @@ int main(){
 
     prim(m,n,aristas);
     mostrar_cola(*aristas);
-
-    n=7;
+}
+void testMatriz3(cola *aristas){
+    int n=7;
+    matriz m=crear_matriz(n);
     int a3[7][7]= {
         { 0, 7,99, 5,99,99,99},
         { 7, 0, 8, 9, 7,99,99},
@@ -210,5 +275,17 @@ int main(){
     mostrar_cola(*aristas);
 
     liberar_matriz(m,n);
+}
+
+int main(){
+    cola *aristas = malloc(sizeof(cola));
+    crear_cola(aristas);
+
+    testMatriz1(aristas);
+    testMatriz2(aristas);
+    testMatriz3(aristas);
+
+    printChart(prim,inicializar_matriz,2,2.35,2.5);
+
     free(aristas);
 }

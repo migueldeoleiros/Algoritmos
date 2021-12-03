@@ -31,6 +31,10 @@ tipo_elemento quitar_primero(cola *);
 tipo_elemento primero(cola);
 void mostrar_cola(cola);
 
+void inicializar_semilla(){
+    srand(time(NULL));
+}
+
 void crear_cola(cola *c) {
     c->tamano = 0;
     c->cabeza = 0;
@@ -320,6 +324,7 @@ void testMatriz4(cola *aristas){
 }
 
 int main(){
+    inicializar_semilla();
     cola *aristas = malloc(sizeof(cola));
     crear_cola(aristas);
     testMatriz1(aristas);

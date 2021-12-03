@@ -12,7 +12,7 @@
 #include <limits.h>
 #include <sys/time.h>
 
-#define TAM_MAX 8000 
+#define TAM_MAX 8000
 typedef int ** matriz;
 typedef struct {
     int x, y, peso;
@@ -71,8 +71,10 @@ tipo_elemento quitar_primero(cola *c) {
 }
 
 void mostrar_cola(cola cola){
+    int i;
+    printf("\n --RESULTADO--\n");
     int pesoTotal=0;
-    for(int i=0;i<cola.final+1;i++){
+    for(i=0;i<cola.final+1;i++){
         printf("(%d,",cola.vector[i].y);
         printf("%d)",cola.vector[i].x);
         pesoTotal+=cola.vector[i].peso;
@@ -99,6 +101,17 @@ matriz crear_matriz(int n) {
             return NULL;
     return aux;
 }
+
+void print_matriz(matriz m,int n) {
+    int i,j;
+    printf("\n --MATRIZ--\n");
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+          printf(" %2d ",m[i][j]);
+        }
+      printf("\n");
+    }
+  }
 
 void inicializar_matriz(matriz m, int n) {
 /* Crea un grafo completo no dirigido con valores aleatorios entre 1 y n */
@@ -218,9 +231,8 @@ void printChart(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
 }
 
 void testMatriz1(cola *aristas){
-    int n=5;
+    int n=5,i,j;
     matriz m=crear_matriz(n);
-
     int a[5][5]={
         {0,1,8,4,7},
         {1,0,2,6,5},
@@ -228,17 +240,18 @@ void testMatriz1(cola *aristas){
         {4,6,9,0,3},
         {7,5,5,3,0},
     };
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++)
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++)
             m[i][j]=a[i][j];
     }
 
+    print_matriz(m,n);
     prim(m,n,aristas);
     mostrar_cola(*aristas);
 }
 
 void testMatriz2(cola *aristas){
-    int n=4;
+    int n=4,i,j;
     matriz m=crear_matriz(n);
     int a2[4][4]= {
         {0,1,4,7},
@@ -246,16 +259,17 @@ void testMatriz2(cola *aristas){
         {4,2,0,3},
         {7,8,3,0},
     };
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++)
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++)
             m[i][j]=a2[i][j];
     }
 
+    print_matriz(m,n);
     prim(m,n,aristas);
     mostrar_cola(*aristas);
 }
 void testMatriz3(cola *aristas){
-    int n=7;
+    int n=7,i,j;
     matriz m=crear_matriz(n);
     int a3[7][7]= {
         { 0, 7,99, 5,99,99,99},
@@ -266,26 +280,52 @@ void testMatriz3(cola *aristas){
         {99,99,99, 6, 8, 0,11},
         {99,99,99,99, 9,11, 0}
     };
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++)
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++)
             m[i][j]=a3[i][j];
     }
 
+    print_matriz(m,n);
     prim(m,n,aristas);
     mostrar_cola(*aristas);
 
     liberar_matriz(m,n);
 }
 
+void testMatriz4(cola *aristas){
+  int n=5;
+  matriz m,x,y;
+  m=crear_matriz(n);
+  x=crear_matriz(n);
+  y=crear_matriz(n);
+
+  inicializar_matriz(m,n);
+  inicializar_matriz(x,n);
+  inicializar_matriz(y,n);
+
+  print_matriz(m,n);
+  prim(m,n,aristas);
+  mostrar_cola(*aristas);
+  liberar_matriz(m,n);
+
+  print_matriz(x,n);
+  prim(x,n,aristas);
+  mostrar_cola(*aristas);
+  liberar_matriz(x,n);
+
+  print_matriz(y,n);
+  prim(y,n,aristas);
+  mostrar_cola(*aristas);
+  liberar_matriz(y,n);
+}
+
 int main(){
     cola *aristas = malloc(sizeof(cola));
     crear_cola(aristas);
-
     testMatriz1(aristas);
     testMatriz2(aristas);
     testMatriz3(aristas);
-
-    printChart(prim,inicializar_matriz,2,2.35,2.5);
-
+    testMatriz4(aristas);
+    printChart(prim,inicializar_matriz,2,2.16,2.5);
     free(aristas);
 }

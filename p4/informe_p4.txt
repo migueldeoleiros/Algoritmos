@@ -18,28 +18,28 @@ La realización de esta practica consiste en la implementación del algoritmo
 Primero realizamos tres tests con matrices de adyacencia predefinidas para
     comprobar su correcto funcionamiento:
 
---MATRIX--
+ --MATRIX--
  0 1 8 4 7
  1 0 2 6 5
  8 2 0 9 5
  4 6 9 0 3
  7 5 5 3 0
 
---RESULTADO--
+ --RESULTADO--
 (0,1)(1,2)(0,3)(3,4)
 Peso: 10
 
---MATRIX--
+ --MATRIX--
  0 1 4 7 
  1 0 2 8 
  4 2 0 3 
  7 8 3 0 
         
---RESULTADO--
+ --RESULTADO--
 (0,1)(1,2)(2,3)
 Peso: 6
 
---MATRIX--
+ --MATRIX--
   0  7 99  5 99 99 99 
   7  0  8  9  7 99 99 
  99  8  0 99  5 99 99 
@@ -48,17 +48,53 @@ Peso: 6
  99 99 99  6  8  0 11 
  99 99 99 99  9 11  0 
 
---RESULTADO--
+ --RESULTADO--
 (0,3)(3,5)(0,1)(1,4)(4,2)(4,6)
 Peso: 39
+
+A pesar de no estar indicado en el enunciado decidimos calcular el resultado del
+     algoritmo con otras 3 matrices definidas aleatoriamente.
+
+ --MATRIZ--
+  0   5   3   3   4 
+  5   0   1   2   3 
+  3   1   0   2   4 
+  3   2   2   0   2 
+  4   3   4   2   0 
+
+ --RESULTADO--
+(0,2)(2,1)(2,3)(3,4)
+Peso: 8
+
+ --MATRIZ--
+  0   5   3   5   1 
+  5   0   2   5   1 
+  3   2   0   4   5 
+  5   5   4   0   3 
+  1   1   5   3   0 
+
+ --RESULTADO--
+(0,4)(4,1)(1,2)(4,3)
+Peso: 7
+
+ --MATRIZ--
+  0   4   1   5   2 
+  4   0   4   5   1 
+  1   4   0   1   2 
+  5   5   1   0   3 
+  2   1   2   3   0 
+
+ --RESULTADO--
+(0,2)(2,3)(0,4)(4,1)
+Peso: 5
 
 Atendiendo al enunciado de la practica 3, nuestro trabajo consiste en calcular
     empiricamente la complejidad computacional del algoritmo generando aleatoriamente
     grafos completos no dirigidos.
 
-A través de estas tablas, podemos determinar la complejidad computacional de
-    estos algoritmos, así como la verificación empírica de su complejidad
-    mediante las cotas sobre y subestimada.
+A través de esta tabla, podemos determinar la complejidad computacional del
+    algoritmo, así como la verificación empírica de su complejidad mediante las
+    cotas sobre y subestimada.
 
 -NOTAS-
    + El (*) situado a la izquierda de determinados valores significa que su tiempo de
@@ -66,6 +102,9 @@ A través de estas tablas, podemos determinar la complejidad computacional de
         repite 1000 veces y hallamos la media resultante.
 
    + Todas las mediciones de tiempos están expresadas en microsegundos.
+
+   + Para el numero de vértices empezamos con 50 y luego vamos duplicando el valor en
+        en cada fila hasta que tarda más de 500000 microsegundos lo que es medio segundo. 
 
       V            t(V)           t(V)/V^2.00        t(V)/V^2.16        t(V)/V^2.50 
 (*)    50          21.695          0.008678            0.004641          0.001227
@@ -88,6 +127,8 @@ Cota ajustada=n^2.5
         estrictamente decreciente
   + El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
         un valor estable de 0.004..
+   
+--CONCLUSIONES--
   + Podemos afirmar que el algoritmo de prim tiene una complejidad computacional
         de n^2.16 con grafos completos no dirijidos aleatorios, la cual es
         ligeramente superios a la teorica (n^2), que usamos como cota subestimada

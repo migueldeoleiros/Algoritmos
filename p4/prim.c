@@ -219,11 +219,12 @@ void printChart(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
     crear_cola(aristas);
 
     printf("\n");
-    printf("%7s%16s%18s%.2f%15s%.2f%15s%.2f \n",
-            "V", "t(V)", "t(V)/V^", cotaSub, "t(V)/V^", cotaAj, "t(V)/V^", cotaSob);
+    printf("%7s%16s%18s%.2f%15s%.2f%15s%.2f\n",
+           "V", "t(V)", "t(V)/V^", cotaSub, "t(V)/V^", cotaAj, "t(V)/V^",
+           cotaSob);
 
     t=0;
-    for(n = 50; n <= 128000 && t<500000; n*=2){
+    for(n = 10; n <= 640 && t<500000; n*=2){
         t = tiemposAlgoritmo(func, funGen, m, n, *aristas);
 
         tsub=t/pow(n,cotaSub);
@@ -297,30 +298,30 @@ void testMatriz3(cola *aristas){
 }
 
 void testMatriz4(cola *aristas){
-  int n=5;
-  matriz m,x,y;
-  m=crear_matriz(n);
-  x=crear_matriz(n);
-  y=crear_matriz(n);
+    int n=5;
+    matriz m,x,y;
+    m=crear_matriz(n);
+    x=crear_matriz(n);
+    y=crear_matriz(n);
 
-  inicializar_matriz(m,n);
-  inicializar_matriz(x,n);
-  inicializar_matriz(y,n);
+    inicializar_matriz(m,n);
+    inicializar_matriz(x,n);
+    inicializar_matriz(y,n);
 
-  print_matriz(m,n);
-  prim(m,n,aristas);
-  mostrar_cola(*aristas);
-  liberar_matriz(m,n);
+    print_matriz(m,n);
+    prim(m,n,aristas);
+    mostrar_cola(*aristas);
+    liberar_matriz(m,n);
 
-  print_matriz(x,n);
-  prim(x,n,aristas);
-  mostrar_cola(*aristas);
-  liberar_matriz(x,n);
+    print_matriz(x,n);
+    prim(x,n,aristas);
+    mostrar_cola(*aristas);
+    liberar_matriz(x,n);
 
-  print_matriz(y,n);
-  prim(y,n,aristas);
-  mostrar_cola(*aristas);
-  liberar_matriz(y,n);
+    print_matriz(y,n);
+    prim(y,n,aristas);
+    mostrar_cola(*aristas);
+    liberar_matriz(y,n);
 }
 
 int main(){
@@ -331,6 +332,6 @@ int main(){
     testMatriz2(aristas);
     testMatriz3(aristas);
     testMatriz4(aristas);
-    printChart(prim,inicializar_matriz,2,2.16,2.5);
+    printChart(prim,inicializar_matriz,1.5,1.8,2);
     free(aristas);
 }

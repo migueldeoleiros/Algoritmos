@@ -88,7 +88,7 @@ Peso: 7
 (0,2)(2,3)(0,4)(4,1)
 Peso: 5
 
-Atendiendo al enunciado de la practica 3, nuestro trabajo consiste en calcular
+Atendiendo al enunciado de la practica 4, nuestro trabajo consiste en calcular
     empiricamente la complejidad computacional del algoritmo generando aleatoriamente
     grafos completos no dirigidos.
 
@@ -103,22 +103,17 @@ A través de esta tabla, podemos determinar la complejidad computacional del
 
    + Todas las mediciones de tiempos están expresadas en microsegundos.
 
-   + Para el numero de vértices empezamos con 50 y luego vamos duplicando el valor en
-        en cada fila hasta que tarda más de 500000 microsegundos lo que es medio segundo. 
+      V            t(V)           t(V)/V^1.50        t(V)/V^1.80        t(V)/V^2.00
+(*)    10           1.540          0.048699            0.024407         0.015400
+(*)    20           5.377          0.060117            0.024473         0.013442
+(*)    40          19.261          0.076136            0.025175         0.012038
+(*)    80          67.267          0.094008            0.025249         0.010510
+(*)   160         223.356          0.110362            0.024076         0.008725
+      320         792.000          0.138357            0.024516         0.007734
 
-      V            t(V)           t(V)/V^2.00        t(V)/V^2.16        t(V)/V^2.50 
-(*)    50          21.695          0.008678            0.004641          0.001227
-(*)   100          76.668          0.007667            0.003670          0.000767
-(*)   200         293.572          0.007339            0.003144          0.000519
-      400        1377.000          0.008606            0.003300          0.000430
-      800        6653.000          0.010395            0.003567          0.000368
-     1600       41971.000          0.016395            0.005036          0.000410
-     3200      187477.000          0.018308            0.005033          0.000324
-     6400      830688.000          0.020280            0.004990          0.000254
-
-Cota subestimada=n^2
-Cota sobrestimada=n^2.16
-Cota ajustada=n^2.5
+Cota subestimada=n^1.5
+Cota sobrestimada=n^2
+Cota ajustada=n^1.8
 
 --OBSERVACIONES--
   + El cociente entre nuestros tiempos y la cota subestimada es
@@ -126,9 +121,9 @@ Cota ajustada=n^2.5
   + El cociente entre nuestros tiempos y la cota sobrestimada es
         estrictamente decreciente
   + El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
-        un valor estable de 0.004..
+        un valor estable de 0.025..
    
 --CONCLUSIONES--
   + Podemos afirmar que el algoritmo de prim tiene una complejidad computacional
-        de n^2.16 con grafos completos no dirijidos aleatorios, la cual es
-        ligeramente superios a la teorica (n^2), que usamos como cota subestimada
+        de n^1.8 con grafos completos no dirigidos aleatorios, la cual es
+        ligeramente inferior a la teorica (n^2), que usamos como cota sobrestimada.

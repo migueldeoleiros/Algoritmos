@@ -11,7 +11,7 @@ OS:      Arch linux x86_64
 Kernel:  5.15.3-arch1-1 
          
 
-La realización de esta practica consiste en la implementación del algoritmo
+La realización de esta prcáctica consiste en la implementación del algoritmo
     de prim para hallar el árbol de recubrimiento mínimo data una matriz de adyacencia
     devolviendo una cola.
 

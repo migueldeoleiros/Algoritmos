@@ -214,7 +214,7 @@ void printChart(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
     double t =0;
     double tsub, taj, tsob;
     int n;
-    matriz m= crear_matriz(8000);
+    matriz m= crear_matriz(800);
     cola *aristas = malloc(sizeof(cola));
     crear_cola(aristas);
 
@@ -233,6 +233,7 @@ void printChart(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
         printf("%6d%16.3f%18.6f%20.6f%18.6f\n", n, t, tsub, taj, tsob);
     }
     free(aristas);
+    liberar_matriz(m,800);
 }
 
 void testMatriz1(cola *aristas){
@@ -253,6 +254,7 @@ void testMatriz1(cola *aristas){
     print_matriz(m,n);
     prim(m,n,aristas);
     mostrar_cola(*aristas);
+    liberar_matriz(m,n);
 }
 
 void testMatriz2(cola *aristas){
@@ -272,6 +274,7 @@ void testMatriz2(cola *aristas){
     print_matriz(m,n);
     prim(m,n,aristas);
     mostrar_cola(*aristas);
+    liberar_matriz(m,n);
 }
 void testMatriz3(cola *aristas){
     int n=7,i,j;
@@ -293,7 +296,6 @@ void testMatriz3(cola *aristas){
     print_matriz(m,n);
     prim(m,n,aristas);
     mostrar_cola(*aristas);
-
     liberar_matriz(m,n);
 }
 

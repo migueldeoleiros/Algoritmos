@@ -214,7 +214,7 @@ void printChart(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
     double t =0;
     double tsub, taj, tsob;
     int n;
-    matriz m= crear_matriz(800);
+    matriz m= crear_matriz(640);
     cola *aristas = malloc(sizeof(cola));
     crear_cola(aristas);
 
@@ -232,6 +232,7 @@ void printChart(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
         tsob=t/pow(n,cotaSob);
         printf("%6d%16.3f%18.6f%20.6f%18.6f\n", n, t, tsub, taj, tsob);
     }
+    liberar_matriz(m,640);
     free(aristas);
     liberar_matriz(m,800);
 }

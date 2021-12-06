@@ -234,7 +234,6 @@ void printChart(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
     }
     liberar_matriz(m,640);
     free(aristas);
-    liberar_matriz(m,800);
 }
 
 void testMatriz1(cola *aristas){

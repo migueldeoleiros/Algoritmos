@@ -211,10 +211,10 @@ double tiemposAlgoritmo(void (*func)(matriz, int, cola*),void (*funGen)(matriz,i
 
 void printChart(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
                 float cotaSub,float cotaAj,float cotaSob ){
-    double t =0;
+    double t=0;
     double tsub, taj, tsob;
     int n;
-    matriz m= crear_matriz(640);
+    matriz m= crear_matriz(320);
     cola *aristas = malloc(sizeof(cola));
     crear_cola(aristas);
 
@@ -223,8 +223,7 @@ void printChart(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
            "V", "t(V)", "t(V)/V^", cotaSub, "t(V)/V^", cotaAj, "t(V)/V^",
            cotaSob);
 
-    t=0;
-    for(n = 10; n <= 640 && t<500000; n*=2){
+    for(n = 10; n <= 320 && t<500000; n*=2){
         t = tiemposAlgoritmo(func, funGen, m, n, *aristas);
 
         tsub=t/pow(n,cotaSub);
@@ -232,7 +231,7 @@ void printChart(void (*func)(matriz, int, cola*),void (*funGen)(matriz,int),
         tsob=t/pow(n,cotaSob);
         printf("%6d%16.3f%18.6f%20.6f%18.6f\n", n, t, tsub, taj, tsob);
     }
-    liberar_matriz(m,640);
+    liberar_matriz(m,320);
     free(aristas);
 }
 
@@ -327,8 +326,8 @@ void testMatriz4(cola *aristas){
 }
 
 int main(){
-    inicializar_semilla();
     cola *aristas = malloc(sizeof(cola));
+    inicializar_semilla();
     crear_cola(aristas);
     testMatriz1(aristas);
     testMatriz2(aristas);

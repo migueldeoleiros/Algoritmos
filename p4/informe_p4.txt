@@ -11,8 +11,8 @@ OS:      Arch linux x86_64
 Kernel:  5.15.3-arch1-1 
          
 
-La realización de esta prcáctica consiste en la implementación del algoritmo
-    de prim para hallar el árbol de recubrimiento mínimo data una matriz de adyacencia
+La realización de esta práctica consiste en la implementación del algoritmo
+    de prim para hallar el árbol de recubrimiento mínimo dada una matriz de adyacencia
     devolviendo una cola.
 
 Primero realizamos tres tests con matrices de adyacencia predefinidas para
@@ -98,7 +98,7 @@ A través de esta tabla, podemos determinar la complejidad computacional del
 
 -NOTAS-
    + El (*) situado a la izquierda de determinados valores significa que su tiempo de
-        ejecución es inferior a 500ms, por lo tanto ejecutamos un bucle el cual lo
+        ejecución es inferior a 500μs, por lo tanto ejecutamos un bucle el cual lo
         repite 1000 veces y hallamos la media resultante.
 
    + Todas las mediciones de tiempos están expresadas en microsegundos.

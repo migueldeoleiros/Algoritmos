@@ -87,7 +87,8 @@ void quicksort(int v[],int n){
         ordenacionPorInsercion(v,n);
 }
 
-double tiemposAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*funGen)(int[], int)){
+double tiemposAlgoritmo(int vector[], int n, void (*func)(int[], int),
+                        void (*funGen)(int[], int)){
     double ta=0,tb=0,t=0,t1=0,t2=0;
     int k=1000;
     int count;
@@ -100,7 +101,6 @@ double tiemposAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*fu
     t=tb-ta;
 
     if(t<500){
-
         ta=microsegundos();
         for(count=0;count<k;count++){
             funGen(vector,n);
@@ -121,7 +121,8 @@ double tiemposAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*fu
     return t;
 }
 
-void printChart(void (*func)(int[], int),void (*funGen)(int[], int),float cotaSub,float cotaAj,float cotaSob ){
+void printChart(void (*func)(int[], int),void (*funGen)(int[], int),
+                float cotaSub,float cotaAj,float cotaSob ){
     double t =0;
     double tsub, taj, tsob;
     int n;
@@ -166,7 +167,8 @@ void ascendente(int v[], int n){
     }
 }
 
-void testWithVector(void (*func)(int[], int),void (*funGen)(int[], int),int vector[],int  n){
+void testWithVector(void (*func)(int[], int),void (*funGen)(int[], int),
+                    int vector[],int  n){
     funGen(vector, n);
     printf("Input: ");
     printVector(vector, n);

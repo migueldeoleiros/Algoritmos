@@ -1,7 +1,7 @@
 // TITLE: Algoritmos Práctica 4
 // AUTHOR 1: Miguel López López        LOGIN 1: m.llopez
-// AUTHOR 2: Ángel Gómez prol          LOGIN 2: angel.gomez.prol
-// AUTHOR 3: Xoel Díaz Préstamo        LOGIN 3: xoel.diaz
+// AUTHOR 2: Xoel Díaz Préstamo        LOGIN 3: xoel.diaz
+// AUTHOR 3: Ángel Gómez prol          LOGIN 2: angel.gomez.prol
 // GROUP: 2.1.4
 // DATE: 07/12/2021
 

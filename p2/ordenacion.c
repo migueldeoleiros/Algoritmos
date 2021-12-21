@@ -1,7 +1,7 @@
 // TITLE: Algoritmos Práctica 2
 // AUTHOR 1: Miguel López López        LOGIN 1: m.llopez
-// AUTHOR 2: Ángel Gómez prol          LOGIN 2: angel.gomez.prol
-// AUTHOR 3: Xoel Díaz Préstamo        LOGIN 3: xoel.diaz
+// AUTHOR 2: Xoel Díaz Préstamo        LOGIN 3: xoel.diaz
+// AUTHOR 3: Ángel Gómez prol          LOGIN 2: angel.gomez.prol
 // GROUP: 2.1.4
 // DATE: 23/10/2021
 
@@ -67,7 +67,8 @@ void ord_shell(int v[], int n){
     }while(incremento != 1);
 }
 
-double testAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*funGen)(int[], int)){
+double testAlgoritmo(int vector[], int n, void (*func)(int[], int),
+                     void (*funGen)(int[], int)){
     double ta=0,tb=0,t=0,t1=0,t2=0;
     int k=1000;
     int count;
@@ -80,7 +81,6 @@ double testAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*funGe
     t=tb-ta;
 
     if(t<500){
-
         ta=microsegundos();
         for(count=0;count<k;count++){
             funGen(vector,n);
@@ -101,9 +101,11 @@ double testAlgoritmo(int vector[], int n, void (*func)(int[], int), void (*funGe
     return t;
 }
 
-void printChart(void (*func)(int[], int),void (*funGen)(int[], int),float cotaSub,float cotaAj,float cotaSob ){
+void printChart(void (*func)(int[], int),void (*funGen)(int[], int),
+                float cotaSub,float cotaAj,float cotaSob ){
     double t =0;
     double tsub, taj, tsob;
+    int vector[32000];
     int n;
 
     printf("\n");
@@ -111,7 +113,6 @@ void printChart(void (*func)(int[], int),void (*funGen)(int[], int),float cotaSu
             "n", "t(n)", "t(n)/n^", cotaSub, "t(n)/n^", cotaAj, "t(n)/n^", cotaSob);
 
     for(n = 500; n <= 32000; n*=2){
-        int vector[n];
         t = testAlgoritmo(vector, n, func, funGen);
 
         tsub=t/pow(n,cotaSub);
@@ -145,7 +146,8 @@ void ascendente(int v[], int n){
     }
 }
 
-void testWithVector(void (*func)(int[], int),void (*funGen)(int[], int),int vector[],int  n){
+void testWithVector(void (*func)(int[], int),void (*funGen)(int[], int)
+                    ,int vector[],int  n){
     funGen(vector, n);
     printf("Input: ");
     printVector(vector, n);

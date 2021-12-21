@@ -12,11 +12,11 @@ Kernel:  5.15.3-arch1-1
          
 
 La realización de esta práctica consiste en la implementación del algoritmo
-    de prim para hallar el árbol de recubrimiento mínimo dada una matriz de adyacencia
-    devolviendo una cola.
+  de prim para hallar el árbol de recubrimiento mínimo dada una matriz de adyacencia
+  devolviendo una cola.
 
 Primero realizamos tres tests con matrices de adyacencia predefinidas para
-    comprobar su correcto funcionamiento:
+  comprobar su correcto funcionamiento:
 
  --MATRIX--
  0 1 8 4 7
@@ -53,7 +53,7 @@ Peso: 6
 Peso: 39
 
 A pesar de no estar indicado en el enunciado decidimos calcular el resultado del
-     algoritmo con otras 3 matrices definidas aleatoriamente.
+  algoritmo con otras 3 matrices definidas aleatoriamente.
 
  --MATRIZ--
   0   5   3   3   4 
@@ -89,19 +89,18 @@ Peso: 7
 Peso: 5
 
 Atendiendo al enunciado de la practica 4, nuestro trabajo consiste en calcular
-    empiricamente la complejidad computacional del algoritmo generando aleatoriamente
-    grafos completos no dirigidos.
+  empiricamente la complejidad computacional del algoritmo generando aleatoriamente
+  grafos completos no dirigidos.
 
 A través de esta tabla, podemos determinar la complejidad computacional del
-    algoritmo, así como la verificación empírica de su complejidad mediante las
-    cotas sobre y subestimada.
+  algoritmo, así como la verificación empírica de su complejidad mediante las
+  cotas sobre y subestimada.
 
 -NOTAS-
-   + El (*) situado a la izquierda de determinados valores significa que su tiempo de
-        ejecución es inferior a 500μs, por lo tanto ejecutamos un bucle el cual lo
-        repite 1000 veces y hallamos la media resultante.
-
-   + Todas las mediciones de tiempos están expresadas en microsegundos.
+  - El (*) situado a la izquierda de determinados valores significa que su tiempo de
+      ejecución es inferior a 500μs, por lo tanto ejecutamos un bucle el cual lo
+      repite 1000 veces y hallamos la media resultante.
+  - Todas las mediciones de tiempos están expresadas en microsegundos.
 
       V            t(V)           t(V)/V^1.50        t(V)/V^1.80        t(V)/V^2.00
 (*)    10           1.540          0.048699            0.024407         0.015400
@@ -116,14 +115,14 @@ Cota sobrestimada=n^2
 Cota ajustada=n^1.8
 
 --OBSERVACIONES--
-  + El cociente entre nuestros tiempos y la cota subestimada es
-        estrictamente creciente
-  + El cociente entre nuestros tiempos y la cota sobrestimada es
-        estrictamente decreciente
-  + El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
-        un valor estable de 0.025..
+  - El cociente entre nuestros tiempos y la cota subestimada es
+      estrictamente creciente
+  - El cociente entre nuestros tiempos y la cota sobrestimada es
+      estrictamente decreciente
+  - El cociente entre nuestros tiempos y la cota ajustada se sitúa próximo a
+      un valor estable de 0.025..
    
 --CONCLUSIONES--
-  + Podemos afirmar que el algoritmo de prim tiene una complejidad computacional
-        de n^1.8 con grafos completos no dirigidos aleatorios, la cual es
-        ligeramente inferior a la teorica (n^2), que usamos como cota sobrestimada.
+  Podemos afirmar que el algoritmo de prim tiene una complejidad computacional
+    de n^1.8 con grafos completos no dirigidos aleatorios, la cual es
+    ligeramente inferior a la teorica (n^2), que usamos como cota sobrestimada.

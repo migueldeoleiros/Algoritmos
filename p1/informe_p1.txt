@@ -6,14 +6,17 @@ GROUP: 2.1.4
 DATE: 20/09/2021
 
 La práctica fue realizada con este dispositivo -->
-Máquina: Intel i5-7200U (4) @ 3.100GHz, Linux arch 5.14.5-arch1-1
+Máquina: Intel i5-7200U (4) @ 3.100GHz (8GB RAM)
+OS:      Arch linux x86_64 
+Kernel:  5.14.5-arch1-1 
+
 
 La realización de esta práctica consiste en la implementación de dos algoritmos,
-   los cuales están destinados a la obtención de la mayor suma consecutiva
-   posible dada una serie de números.
+  los cuales están destinados a la obtención de la mayor suma consecutiva
+  posible dada una serie de números.
 
 En este primer test, se comprobó la eficacia de los algoritmos, en esta ocasión
-   mediante un array de números ya conocidos.
+  mediante un array de números ya conocidos.
 
 test con los números dados
 [  4  0  9  2  5]    20    20
@@ -24,7 +27,7 @@ test con los números dados
 [ -9  2 -5 -4  6]     6     6
 
 Por otra parte, en el segundo, se ejecutó el código a la vez que mediante otras
-    funciones se obtenían números aleatorios para la prueba del algoritmo.
+  funciones se obtenían números aleatorios para la prueba del algoritmo.
 
 test de números aleatorios
 [  0 -4 -2  4  2 ]    6    6
@@ -36,15 +39,22 @@ test de números aleatorios
 
 
 Atendiendo al enunciado de la práctica 1, nuestro objetivo era la realización de
-   la comprobación de la eficiencia y tiempos de ejecución de los algoritmos
-   implementados mediante vectores de tamaño n, siendo su mínimo valor 500 y
-   duplicándose hasta llegar a un vector de 32000 elementos.
-Mediante la obtención de la siguiente tabla podemos determinar la complejidad
-   computacional del algoritmo (ya que en ella se detallan los tiempos de
-   ejecución del mismo) así como realizamos la verificación empírica de su
-   complejidad mediante el uso de una cota sobrestimada y una cota
-   subestimada.
+  la comprobación de la eficiencia y tiempos de ejecución de los algoritmos
+  implementados mediante vectores de tamaño n, siendo su mínimo valor 500 y
+  duplicándose hasta llegar a un vector de 32000 elementos.
 
+Mediante la obtención de la siguiente tabla podemos determinar la complejidad
+  computacional del algoritmo (ya que en ella se detallan los tiempos de
+  ejecución del mismo) así como realizamos la verificación empírica de su
+  complejidad mediante el uso de una cota sobrestimada y una cota
+  subestimada.
+
+-NOTAS-
+  - El (*) situado a la izquierda de determinados valores significa que su tiempo de
+      ejecución es inferior a 500ms, por lo tanto ejecutamos un bucle el cual lo
+      repite 1000 veces y hallamos la media resultante.
+  - Todas las mediciones de tiempos están expresadas en micro segundos (ms).
+  - Carencia de mediciones anómalas.
 
 Test con SumaSubMax1
       n              t(n)          t(n)/n^1.8              t(n)/n^2         t(n)/n^2.2
@@ -61,11 +71,11 @@ Cota sobrestimada= n^2.2
 Cota ajustada= n^2
 
 --OBSERVACIONES--
-*Podemos observar que la diferencia entre nuestro algoritmo y los y la cota
-   subestimada es creciente, mientras que en la cota sobrestimada ocurre lo opuesto,
-   es decir, tienen tendencia decreciente. En nuestra cota ajustada, la diferencia
-   entre nuestros tiempos y la cota, se sitúan próximos a un valor estable de
-   0.0012..*
+Podemos observar que la diferencia entre nuestro algoritmo y los y la cota
+  subestimada es creciente, mientras que en la cota sobrestimada ocurre lo opuesto,
+  es decir, tienen tendencia decreciente. En nuestra cota ajustada, la diferencia
+  entre nuestros tiempos y la cota, se sitúan próximos a un valor estable de
+  0.0012..*
 
 
 Test con SumaSubMax2
@@ -83,22 +93,14 @@ Cota sobrestimada=n^1.15
 Cota ajustada=n^0.95
 
 --OBSERVACIONES--
-*Podemos observar que la diferencia entre nuestro algoritmo y los y la cota
-   subestimada es creciente, mientras que en la cota sobrestimada ocurre lo opuesto,
-   es decir, tienen tendencia decreciente. En nuestra cota ajustada, la diferencia
-   entre nuestros tiempos y la cota, se sitúan próximos a un valor estable de
-   0.0041..*
+Podemos observar que la diferencia entre nuestro algoritmo y los y la cota
+  subestimada es creciente, mientras que en la cota sobrestimada ocurre lo opuesto,
+  es decir, tienen tendencia decreciente. En nuestra cota ajustada, la diferencia
+  entre nuestros tiempos y la cota, se sitúan próximos a un valor estable de
+  0.0041..*
 
 --CONCLUSIONES--
-*Podemos deducir que el primer algoritmo (sumaSubMax1) tiene una complejidad
-   computacional de n^2, mientras que la complejidad computacional del  segundo
-   algoritmo (sumaSubMax2) es menor, situándose en n^0.95.
+Podemos deducir que el primer algoritmo (sumaSubMax1) tiene una complejidad
+  computacional de n^2, mientras que la complejidad computacional del  segundo
+  algoritmo (sumaSubMax2) es menor, situándose en n^0.95.
 
--NOTAS-
--El (*) situado a la izquierda de determinados valores significa que su tiempo de
-   ejecución es inferior a 500ms, por lo tanto ejecutamos un bucle el cual lo
-   repite 1000 veces y hallamos la media resultante.
-
--Todas las mediciones de tiempos están expresadas en micro segundos (ms).
-
--Carencia de mediciones anómalas.

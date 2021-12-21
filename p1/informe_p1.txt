@@ -19,12 +19,12 @@ En este primer test, se comprobó la eficacia de los algoritmos, en esta ocasió
   mediante un array de números ya conocidos.
 
 test con los números dados
-[  4  0  9  2  5]    20    20
-[ -2 -1 -9 -7 -1]     0     0
-[  9 -2  1 -7 -8]     9     9
-[  7 -5  6  7 -7]    15    15
-[ 15 -2 -5 -4 16]    20    20
-[ -9  2 -5 -4  6]     6     6
+[  4  0  9  2  5 ]    20    20
+[ -2 -1 -9 -7 -1 ]     0     0
+[  9 -2  1 -7 -8 ]     9     9
+[  7 -5  6  7 -7 ]    15    15
+[ 15 -2 -5 -4 16 ]    20    20
+[ -9  2 -5 -4  6 ]     6     6
 
 Por otra parte, en el segundo, se ejecutó el código a la vez que mediante otras
   funciones se obtenían números aleatorios para la prueba del algoritmo.
@@ -32,10 +32,10 @@ Por otra parte, en el segundo, se ejecutó el código a la vez que mediante otra
 test de números aleatorios
 [  0 -4 -2  4  2 ]    6    6
 [  5  0 -3  4 -4 ]    6    6
-[  4  5  5 -2  5 ]    17    17
+[  4  5  5 -2  5 ]   17   17
 [  1 -2  4 -2 -5 ]    4    4
 [  4  3 -4  1  0 ]    7    7
-[ -4  5  5  0  5 ]    15    15
+[ -4  5  5  0  5 ]   15   15
 
 
 Atendiendo al enunciado de la práctica 1, nuestro objetivo era la realización de
@@ -51,10 +51,9 @@ Mediante la obtención de la siguiente tabla podemos determinar la complejidad
 
 -NOTAS-
   - El (*) situado a la izquierda de determinados valores significa que su tiempo de
-      ejecución es inferior a 500ms, por lo tanto ejecutamos un bucle el cual lo
+      ejecución es inferior a 500μs, por lo tanto ejecutamos un bucle el cual lo
       repite 1000 veces y hallamos la media resultante.
-  - Todas las mediciones de tiempos están expresadas en micro segundos (ms).
-  - Carencia de mediciones anómalas.
+  - Todas las mediciones de tiempos están expresadas en micro segundos (μs).
 
 Test con SumaSubMax1
       n              t(n)          t(n)/n^1.8              t(n)/n^2         t(n)/n^2.2
@@ -88,6 +87,8 @@ Test con SumaSubMax2
 (*) 16000            40.86          0.028719              0.004143          0.000598
 (*) 32000            79.46          0.033212              0.004171          0.000524
 
+- Medición anómala para n=500, es ligeramente inferior de lo esperado
+
 Cota subestimada= n^0.75
 Cota sobrestimada=n^1.15
 Cota ajustada=n^0.95
@@ -102,5 +103,6 @@ Podemos observar que la diferencia entre nuestro algoritmo y los y la cota
 --CONCLUSIONES--
 Podemos deducir que el primer algoritmo (sumaSubMax1) tiene una complejidad
   computacional de n^2, mientras que la complejidad computacional del  segundo
-  algoritmo (sumaSubMax2) es menor, situándose en n^0.95.
+  algoritmo (sumaSubMax2) es menor, situándose en n^0.95. Con esto podemos
+  concluir que sumaSubMax2 será la mejor opción.
 
